@@ -51,6 +51,41 @@ window.addEventListener('load', startFunction);
 
 function startFunction()
 {
+  var listGroups = document.getElementsByClassName('listControl');
+  for (var i = 0; i < listGroups.length; i++)
+  {
+    listGroups[i].addEventListener('click', toggleListVisibility)
+  }
+
+  console.log(listGroups[0]);
   
-  console.log("CONTENT LOADED");
+  //lists.display = "block";
+  //console.log(groups);  
+  //console.log("CONTENT LOADED");
+}
+
+function toggleListVisibility(e)
+{
+  //get the <A> parent so we can select the sublist
+  var parent = e.target.parentElement;
+
+  var lists = parent.getElementsByClassName('sublists')[0];
+  //simple toggle, when the display is hidden and the item was clicked, expand
+  //otherwise hide it
+  lists.style["display"] = lists.style["display"] == "" ? "block" : "";
+
+  
+  //hide all other lists
+  var listGroups = document.getElementsByClassName('listControl');
+  for (var i = 0; i < listGroups.length; i++)
+  {
+    if (listGroups[i] !== e.target)
+    {
+      //toggle the display of the accompanying sublist in the clicked <LI>
+      //the targets parents child sublist
+      listGroups[i].parentElement
+                   .getElementsByClassName('sublists')[0]
+                   .style["display"] = "";
+    }
+  }
 }

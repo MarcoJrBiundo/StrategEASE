@@ -1,26 +1,26 @@
 <template>
 <div class="sidenavi">
   <ul>
-    <li><a href="#intervention">Intervention</a>
-      <ul class="sublists">
+    <li><a class="listControl" href="#intervention">Intervention</a>
+      <ul class="sublists" hidden>
         <li><router-link :to="{ name: 'DTIdescription' }"><a href="">Description</a></router-link></li>
         <li><router-link :to="{ name: 'DTIevidence' }"><a href="">Evidence</a></router-link></li>
         <li><router-link :to="{ name: 'DTIwhowillchange' }"><a href="">Who Will Chance</a></router-link></li>
       </ul>
     </li>
-    <li><a href="#services">Implementation</a>
-      <ul class="sublists">
+    <li><a class="listControl" href="#implementation">Implementation</a>
+      <ul class="sublists" hidden>
         <li><router-link :to="{ name: 'SISbehaviours' }"><a href="">Behaviours</a></router-link></li>
         <li><router-link :to="{ name: 'SISdomains' }"><a href="">Domains</a></router-link></li>
       </ul> 
     </li>
-    <li><a href="#clients">Operationalize</a>
-      <ul class="sublists">
+    <li><a class="listControl" href="#operationalize">Operationalize</a>
+      <ul class="sublists" hidden>
         <li><a href="#">Strategies</a></li>
       </ul>   
     </li>
     
-    <li><a href="#contact">Summary</a></li>
+    <li><a href="#summary">Summary</a></li>
   </ul>
 </div>
 </template>
