@@ -1,8 +1,6 @@
 <template>
 <div class="indexclass">
-
-      <h2>Main page interevention buttons sub list buttons should work now</h2>
-
+  <h2>Main page interevention buttons sub list buttons should work now</h2>
 </div>
 
 </template>

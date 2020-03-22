@@ -8,7 +8,7 @@
 
 <script>
 import Navbar from '@/components/Navbar'
-import Header from '@/components/Header'
+import Header from '@/components/VHeader'
 export default {
   name: 'App',
     components: {

@@ -1,22 +1,26 @@
 <template>
 <div class="sidenavi">
   <ul>
-  <li><a href="">Intervention</a></li>
-  <ul class="sublists">
-    <li><router-link :to="{ name: 'DTIdescription' }"><a href="">Description</a></router-link></li>
-    <li><router-link :to="{ name: 'DTIevidence' }"><a href="">Evidence</a></router-link></li>
-    <li><router-link :to="{ name: 'DTIwhowillchange' }"><a href="">Who Will Chance</a></router-link></li>
-  </ul>  
-  <li><a href="#services">Implementation</a></li>
- <ul class="sublists">
-    <li><a href="#">Behaviours</a></li>
-    <li><a href="#">Domains</a></li>
-  </ul> 
-  <li><a href="#clients">Operationalize</a></li>
- <ul class="sublists">
-    <li><a href="#">Strategies</a></li>
-  </ul> 
-  <li><a href="#contact">Summary</a></li>
+    <li><a href="#intervention">Intervention</a>
+      <ul class="sublists">
+        <li><router-link :to="{ name: 'DTIdescription' }"><a href="">Description</a></router-link></li>
+        <li><router-link :to="{ name: 'DTIevidence' }"><a href="">Evidence</a></router-link></li>
+        <li><router-link :to="{ name: 'DTIwhowillchange' }"><a href="">Who Will Chance</a></router-link></li>
+      </ul>
+    </li>
+    <li><a href="#services">Implementation</a>
+      <ul class="sublists">
+        <li><router-link :to="{ name: 'SISbehaviours' }"><a href="">Behaviours</a></router-link></li>
+        <li><router-link :to="{ name: 'SISdomains' }"><a href="">Domains</a></router-link></li>
+      </ul> 
+    </li>
+    <li><a href="#clients">Operationalize</a>
+      <ul class="sublists">
+        <li><a href="#">Strategies</a></li>
+      </ul>   
+    </li>
+    
+    <li><a href="#contact">Summary</a></li>
   </ul>
 </div>
 </template>
@@ -33,8 +37,6 @@ export default {
 </script>
 
 <style>
-
-
 .sidenavi {
   height: 650px;
   width: 15%;
@@ -46,7 +48,6 @@ export default {
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 30px;
   opacity: 1;
-  
 }
 
 .sidenavi a {

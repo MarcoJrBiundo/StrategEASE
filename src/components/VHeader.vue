@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'header',
+  name: 'vheader',
   data () {
     return {
       title: 'Strategease',
