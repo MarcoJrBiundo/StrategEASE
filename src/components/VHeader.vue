@@ -31,30 +31,28 @@ export default {
 
 <style>
 .navbar nav{
-padding: 0 20px;
-      top: 0px;
-left: 0px;
-width: 100%;
-height: 119px;
-background: #14B49E 0% 0% no-repeat padding-box;
-box-shadow: 0px 3px 6px #00000029;
-border-radius: 0px 0px 0px 41px;
-opacity: 1;
-      
-      
-      }
+    padding: 0 20px;
+     top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 119px;
+    background: #14B49E 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 0px 0px 0px 41px;
+    opacity: 1;  
+}
 .nav-extended{
     background-color: #373f51
 }
 .mybut{
-color:white;
-position: absolute;
-top: 30%;
-left: 95%;
-width: 78px;
-height: 44px;
-opacity: 1;
-font-size: 30px
+    color:white;
+    position: absolute;
+    top: 30%;
+    left: 95%;
+    width: 78px;
+    height: 44px;
+    opacity: 1;
+    font-size: 30px
 }
 
 </style>

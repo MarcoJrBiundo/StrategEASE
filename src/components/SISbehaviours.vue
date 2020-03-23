@@ -11,15 +11,25 @@
     <li><a href="www.google.com">www.google.com</a></li>
   </div>
   <div>
-<!--buttons to go in here-->
+  <div id="behaviourList">
+    <behaviour id="behaviour1"></behaviour>
+  </div>
+  <input id="addBehaviour" type="button" value="+">
+  <!--buttons to go in here-->
   </div>
 </div>
 
 </template>
 
 <script>
+import behaviour from '@/components/behaviour';
+
 export default {
   name: 'SISbehaviours',
+  components: 
+  {
+    behaviour
+  },
   data () {
     return {
     }

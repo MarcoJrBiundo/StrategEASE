@@ -19,15 +19,14 @@ export default {
 <style >
 .indexclass{
   position: absolute;
-top:  18%;
-left: 17%;
-width: 82%;
-height: 80%;
-background: #FFFFFF 0% 0% no-repeat padding-box;
-box-shadow: 0px 3px 6px #00000029;
-border-radius: 30px;
-opacity: 1;
-
+  top:  18%;
+  left: 17%;
+  width: 82%;
+  height: 80%;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 30px;
+  opacity: 1;
 }
 
 </style>

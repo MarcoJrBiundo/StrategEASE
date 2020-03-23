@@ -59,7 +59,7 @@ export default {
   text-align: left;
   letter-spacing: 0;
   color: #A4A4A4;
-opacity: 1;
+  opacity: 1;
 }
 
 .sidenavi a:hover {

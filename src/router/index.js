@@ -5,6 +5,7 @@ import DTIdescription from '@/components/DTIdescription'
 import DTIevidence from '@/components/DTIevidence'
 import DTIwhowillchange from '@/components/DTIwhowillchange'
 import SISbehaviours from '@/components/SISbehaviours'
+import behaviour from '@/components/behaviour'
 import SISdomains from '@/components/SISdomains'
 
 Vue.use(Router)
@@ -17,17 +18,14 @@ export default new Router({
       component: Index
     },
     {
-
       path: '/dti-description',
       name: 'DTIdescription',
       component: DTIdescription
     },
     {
-
       path: '/dti-evidence',
       name: 'DTIevidence',
       component: DTIevidence
-    
     },
     {
       path: '/dti-whowillchange',
@@ -62,6 +60,27 @@ function startFunction()
   //lists.display = "block";
   //console.log(groups);  
   //console.log("CONTENT LOADED");
+
+  document.getElementById('addBehaviour').addEventListener('click', addBehaviour);
+}
+
+function addBehaviour(e)
+{
+  var behaviourList = document.getElementById('behaviourList').children;
+  //get the count from the id
+  var behaviourCount = behaviourList[behaviourList.length - 1].id.replace("behaviour","");
+  behaviourCount = parseInt(behaviourCount) + 1;
+  console.log(behaviourCount);
+  var newBehaviour = document.createElement("DIV");
+  newBehaviour.setAttribute('id', ("behaviour"+behaviourCount).toString());
+
+  document.getElementById('behaviourList').appendChild(newBehaviour);
+
+  new Vue({
+    el: '#behaviour' + behaviourCount,
+    template: '<behaviour id="behaviour'+behaviourCount+'"/>',
+    components: { behaviour }
+  });
 }
 
 function toggleListVisibility(e)
