@@ -60,27 +60,6 @@ function startFunction()
   //lists.display = "block";
   //console.log(groups);  
   //console.log("CONTENT LOADED");
-
-  document.getElementById('addBehaviour').addEventListener('click', addBehaviour);
-}
-
-function addBehaviour(e)
-{
-  var behaviourList = document.getElementById('behaviourList').children;
-  //get the count from the id
-  var behaviourCount = behaviourList[behaviourList.length - 1].id.replace("behaviour","");
-  behaviourCount = parseInt(behaviourCount) + 1;
-  console.log(behaviourCount);
-  var newBehaviour = document.createElement("DIV");
-  newBehaviour.setAttribute('id', ("behaviour"+behaviourCount).toString());
-
-  document.getElementById('behaviourList').appendChild(newBehaviour);
-
-  new Vue({
-    el: '#behaviour' + behaviourCount,
-    template: '<behaviour id="behaviour'+behaviourCount+'"/>',
-    components: { behaviour }
-  });
 }
 
 function toggleListVisibility(e)

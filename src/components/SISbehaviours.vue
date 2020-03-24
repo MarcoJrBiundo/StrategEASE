@@ -14,7 +14,7 @@
   <div id="behaviourList">
     <behaviour id="behaviour1"></behaviour>
   </div>
-  <input id="addBehaviour" type="button" value="+">
+  <input id="addBehaviour" v-on:click="addBehaviour()" type="button" value="+">
   <!--buttons to go in here-->
   </div>
 </div>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import behaviour from '@/components/behaviour';
 
 export default {
@@ -32,6 +33,25 @@ export default {
   },
   data () {
     return {
+    }
+  },
+  methods: {
+    addBehaviour: function(e){
+      var behaviourList = document.getElementById('behaviourList').children;
+      //get the count from the id
+      var behaviourCount = behaviourList[behaviourList.length - 1].id.replace("behaviour","");
+      behaviourCount = parseInt(behaviourCount) + 1;
+      console.log(behaviourCount);
+      var newBehaviour = document.createElement("DIV");
+      newBehaviour.setAttribute('id', ("behaviour"+behaviourCount).toString());
+
+      document.getElementById('behaviourList').appendChild(newBehaviour);
+
+      new Vue({
+        el: '#behaviour' + behaviourCount,
+        template: '<behaviour id="behaviour'+behaviourCount+'"/>',
+        components: { behaviour }
+      });
     }
   }
 }
