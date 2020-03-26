@@ -50,6 +50,14 @@ export default {
   opacity: 1;
 }
 
+.domainsClass h2 {
+  padding-left: 40px;
+  text-align: left;
+  letter-spacing: 0;
+  color: #206aa2;
+  opacity: 1;
+}
+
 .caseNameField {
   width: 95%;
   margin-left: 3%;

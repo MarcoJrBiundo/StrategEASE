@@ -7,8 +7,8 @@
         <behaviour id="behaviour1"></behaviour>
       </div>
       <input
-        id="addBehaviour"
-        v-on:click="addBehaviour()"
+        id="addActor"
+        v-on:click="addActor"
         type="button"
         value="+"
       />
@@ -46,7 +46,7 @@ export default {
     };
   },
   methods: {
-    addBehaviour: function(e) {
+    addActor: function(e) {
       var behaviourList = document.getElementById("behaviourList").children;
       //get the count from the id
       var behaviourCount = behaviourList[behaviourList.length - 1].id.replace(

@@ -3,7 +3,7 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="inputs">
       <!--buttons to go in here-->
-      <div class="half border-right">  
+      <div>  
         <h4>Who will change</h4>
         <input type="text" placeholder="Person to change">
         <input
@@ -60,12 +60,15 @@ export default {
   border-right: 1px solid black;
   margin-right: 2px;
 }
+.inputs {
+  width: 40%;
+  position: absolute;
+  margin-top: 15%;
+  height: 10%;
+  top: 215;
+}
 .half {
   width: 40%;
-  float: left;
-}
-.inputs {
-  clear: both;
 }
 .indexclass {
   position: absolute;

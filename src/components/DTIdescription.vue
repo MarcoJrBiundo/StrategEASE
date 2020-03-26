@@ -1,7 +1,7 @@
 <template>
   <div class="indexclass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
-    <div class="caseNameField">
+    <div class="inputs">
       <label for="case">Case:</label>
       <input type="text" name="case" />
       <label for="case">Describe the intervention you are implmenting:</label>
@@ -68,7 +68,7 @@ export default {
   opacity: 1;
 }
 
-.caseNameField {
+.inputs {
   width: 95%;
   margin-left: 3%;
   position: absolute;
