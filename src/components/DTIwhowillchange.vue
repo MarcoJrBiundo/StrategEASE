@@ -1,18 +1,30 @@
 <template>
   <div class="indexclass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
-    <div>
+    <div class="inputs">
       <!--buttons to go in here-->
+      <div id="behaviourList">
+        <behaviour id="behaviour1"></behaviour>
+      </div>
+      <input
+        id="addBehaviour"
+        v-on:click="addBehaviour()"
+        type="button"
+        value="+"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
+import behaviour from "@/components/behaviour";
 import CommonMainPage from "./CommonMainPage";
 
 export default {
-  name: "DTIdevidence",
+  name: "DTIwhowillchange",
   components: {
+    behaviour,
     CommonMainPage
   },
   data() {
@@ -32,12 +44,40 @@ export default {
         { link: "www.google.com", display: "Google 3" }
       ]
     };
+  },
+  methods: {
+    addBehaviour: function(e) {
+      var behaviourList = document.getElementById("behaviourList").children;
+      //get the count from the id
+      var behaviourCount = behaviourList[behaviourList.length - 1].id.replace(
+        "behaviour",
+        ""
+      );
+      behaviourCount = parseInt(behaviourCount) + 1;
+      console.log(behaviourCount);
+      var newBehaviour = document.createElement("DIV");
+      newBehaviour.setAttribute(
+        "id",
+        ("behaviour" + behaviourCount).toString()
+      );
+
+      document.getElementById("behaviourList").appendChild(newBehaviour);
+
+      new Vue({
+        el: "#behaviour" + behaviourCount,
+        template: '<behaviour id="behaviour' + behaviourCount + '"/>',
+        components: { behaviour }
+      });
+    }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.inputs {
+  clear: both;
+}
 .indexclass {
   position: absolute;
   top: 18%;
@@ -56,6 +96,20 @@ export default {
   letter-spacing: 0;
   color: #206aa2;
   opacity: 1;
+}
+
+.links {
+  width: 40%;
+  margin-right: 5%;
+  padding-left: 5%;
+  padding-bottom: 5%;
+  float: right;
+  background: #47cacc2b 0% 0% no-repeat padding-box;
+  box-shadow: 7px 7px 34px #28282836;
+  border: 2px solid #67cbcd;
+  border-radius: 21px;
+  opacity: 1;
+  margin-top: -100px;
 }
 
 .caseNameField {

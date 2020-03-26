@@ -2,29 +2,20 @@
   <div class="behavioursClass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div>
-      <div id="behaviourList">
-        <behaviour id="behaviour1"></behaviour>
-      </div>
-      <input
-        id="addBehaviour"
-        v-on:click="addBehaviour()"
-        type="button"
-        value="+"
-      />
+      <select id="asd">
+        <option value="Default"></option>
+      </select>
       <!--buttons to go in here-->
     </div>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import behaviour from "@/components/behaviour";
 import CommonMainPage from "./CommonMainPage";
 
 export default {
   name: "SISbehaviours",
   components: {
-    behaviour,
     CommonMainPage
   },
   data() {
@@ -45,31 +36,6 @@ export default {
       ]
     };
   },
-  methods: {
-    addBehaviour: function(e) {
-      var behaviourList = document.getElementById("behaviourList").children;
-      //get the count from the id
-      var behaviourCount = behaviourList[behaviourList.length - 1].id.replace(
-        "behaviour",
-        ""
-      );
-      behaviourCount = parseInt(behaviourCount) + 1;
-      console.log(behaviourCount);
-      var newBehaviour = document.createElement("DIV");
-      newBehaviour.setAttribute(
-        "id",
-        ("behaviour" + behaviourCount).toString()
-      );
-
-      document.getElementById("behaviourList").appendChild(newBehaviour);
-
-      new Vue({
-        el: "#behaviour" + behaviourCount,
-        template: '<behaviour id="behaviour' + behaviourCount + '"/>',
-        components: { behaviour }
-      });
-    }
-  }
 };
 </script>
 
@@ -122,5 +88,12 @@ export default {
   margin-top: 15%;
   height: 10%;
   top: 215;
+}
+
+#behaviourList {
+  clear: both;
+  display: block;
+  overflow-y: scroll;
+  max-height:450px;
 }
 </style>

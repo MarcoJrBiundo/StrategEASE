@@ -1,8 +1,26 @@
 <template>
   <div class="indexclass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
-    <div>
+    <div class="inputs">
       <!--buttons to go in here-->
+      <div class="half border-right">  
+        <h4>Who will change</h4>
+        <input type="text" placeholder="Person to change">
+        <input
+        id="addWho"
+        type="button"
+        value="+"
+        />
+      </div>
+      <div class="half">  
+        <h4>What will they change</h4>
+        <input type="text" placeholder="Behaviour to change">
+        <input
+          id="addWhat"
+          type="button"
+          value="+"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +56,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.border-right {
+  border-right: 1px solid black;
+  margin-right: 2px;
+}
+.half {
+  width: 40%;
+  float: left;
+}
+.inputs {
+  clear: both;
+}
 .indexclass {
   position: absolute;
   top: 18%;

@@ -17,12 +17,14 @@
 
 <script>
 export default {
-  name: "behaviour",
   data() {
-    return {};
+    return {
+      id: ""
+    };
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style></style>
+<style>
+</style>
