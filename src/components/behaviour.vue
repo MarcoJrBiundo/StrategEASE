@@ -1,10 +1,16 @@
 <template>
   <div>
     <input
-      placeholder="Behaviour"
+      placeholder="Who will change"
       type="text"
-      name="behavior"
-      group="behaviourGroup"
+      name="who"
+      group="behaviourWho"
+    />
+    <input
+      placeholder="What will they change"
+      type="text"
+      name="what"
+      group="behaviourWhat"
     />
   </div>
 </template>
