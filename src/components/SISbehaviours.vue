@@ -1,34 +1,34 @@
 <template>
   <div class="behavioursClass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
-    <div>
-      <select id="asd">
-        <option value="Default"></option>
-      </select>
-      <!--buttons to go in here-->
+    <div id="barrierList">
+      <barrier id="barrier1"></barrier>
     </div>
+    <input
+      id="addBarrier"
+      v-on:click="addBarrier"
+      type="button"
+      value="+"
+    />
   </div>
 </template>
 
 <script>
+import Vue from 'vue';
+import barrier from "./barrier";
 import CommonMainPage from "./CommonMainPage";
 
 export default {
   name: "SISbehaviours",
   components: {
+    barrier,
     CommonMainPage
   },
   data() {
     return {
       title: "Behaviours to change",
       text:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod \
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim \
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea \
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate \
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint \
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt \
-        mollit anim id est laborum.",
+        "Map each behaviour to domain(s) and list the involved barriers for each behaviour.",
       links: [
         { link: "www.google.com", display: "Google 1" },
         { link: "www.google.com", display: "Google 2" },
@@ -36,6 +36,26 @@ export default {
       ]
     };
   },
+  methods: {
+    addBarrier: function(e) {
+      var barrierList = document.getElementById("barrierList").children;
+      //get the count from the id
+      var barrierCount = parseInt(barrierList[barrierList.length - 1].id.replace("barrier", "")) + 1;
+
+      var newBarrier = document.createElement("DIV");
+      newBarrier.setAttribute(
+        "id", ("barrier" + barrierCount).toString()
+      );
+
+      document.getElementById("barrierList").append(newBarrier);
+
+      new Vue({
+        el: "#barrier" + barrierCount,
+        template: '<barrier id="barrier' + barrierCount + '"/>',
+        components: { barrier }
+      });
+    }
+  }
 };
 </script>
 
@@ -90,7 +110,7 @@ export default {
   top: 215;
 }
 
-#behaviourList {
+#barrierList {
   clear: both;
   display: block;
   overflow-y: scroll;
