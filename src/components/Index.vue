@@ -7,8 +7,8 @@
       <ul>
       </ul>
     </div>
-    <router-link :to="{ name: 'DTIdescription' }"
-      ><a href="">Start New Case</a>
+    <router-link :to="{ name: 'DTIdescription' }">
+      Start New Case
     </router-link>
   </div>
 </template>

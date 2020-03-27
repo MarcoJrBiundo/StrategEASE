@@ -8,6 +8,10 @@ import SISbehaviours from '@/components/SISbehaviours'
 import behaviour from '@/components/behaviour'
 import SISdomains from '@/components/SISdomains'
 
+//our main json object containing everything
+var dbObject;
+var currentCase;
+
 Vue.use(Router)
 
 export default new Router({
@@ -30,7 +34,7 @@ export default new Router({
     {
       path: '/dti-whowillchange',
       name: 'DTIwhowillchange',
-      component: DTIwhowillchange 
+      component: DTIwhowillchange
     },
     {
       path: '/sis-behaviours',
@@ -41,11 +45,16 @@ export default new Router({
       path: '/sis-domains',
       name: 'SISdomains',
       component: SISdomains 
-    },
+    }
   ]
 })
 
 window.addEventListener('load', startFunction);
+
+function saveData(){
+  //OVERWRITES THE firebase logical? database with the local data
+  //DATABASE=data;
+}
 
 function startFunction()
 {

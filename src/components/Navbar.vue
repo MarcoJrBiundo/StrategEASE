@@ -4,44 +4,44 @@
       <li>
         <a class="listControl" href="#intervention">Intervention</a>
         <ul class="sublists" hidden>
-          <li>
-            <router-link :to="{ name: 'DTIdescription' }"
-              ><a href="">Description</a></router-link
+          <li class="leftSpacing">
+            <router-link :to="{ name: 'DTIdescription' }">
+              Description
+            </router-link
             >
           </li>
           <!--
           <li>
             <router-link :to="{ name: 'DTIevidence' }"
-              ><a href="">Evidence</a></router-link
-            >
+              ><a href="">Evidence</a></router-link>
           </li>
           -->
-          <li>
-            <router-link :to="{ name: 'DTIwhowillchange' }"
-              ><a href="">Who Will Change</a></router-link
-            >
+          <li class="leftSpacing">
+            <router-link :to="{ name: 'DTIwhowillchange' }">
+              Who Will Change
+            </router-link>
           </li>
         </ul>
       </li>
       <li>
         <a class="listControl" href="#implementation">Implementation</a>
         <ul class="sublists" hidden>
-          <li>
-            <router-link :to="{ name: 'SISbehaviours' }"
-              ><a href="">Behaviours</a></router-link
-            >
+          <li class="leftSpacing">
+            <router-link :to="{ name: 'SISbehaviours' }">
+              Behaviours
+            </router-link>
           </li>
-          <li>
-            <router-link :to="{ name: 'SISdomains' }"
-              ><a href="">Domains</a></router-link
-            >
+          <li class="leftSpacing">
+            <router-link :to="{ name: 'SISdomains' }" >
+              Domains
+            </router-link>
           </li>
         </ul>
       </li>
       <li>
         <a class="listControl" href="#operationalize">Operationalize</a>
         <ul class="sublists" hidden>
-          <li><a href="#">Strategies</a></li>
+          <li>Strategies</li>
         </ul>
       </li>
 
@@ -60,6 +60,10 @@ export default {
 </script>
 
 <style>
+.leftSpacing {
+  margin-left: 15px;
+}
+
 .sidenavi {
   position: absolute;
   height: 80%;
