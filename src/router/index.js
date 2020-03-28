@@ -11,6 +11,7 @@ import SISdomains from '@/components/SISdomains'
 //our main json object containing everything
 var dbObject;
 var currentCase;
+var strategyMap = require("@/assets/strategyMap.json");;
 
 Vue.use(Router)
 
@@ -44,7 +45,8 @@ export default new Router({
     {
       path: '/sis-domains',
       name: 'SISdomains',
-      component: SISdomains 
+      component: SISdomains,
+      props: { map: strategyMap }
     }
   ]
 })
@@ -57,7 +59,7 @@ function saveData(){
 }
 
 function startFunction()
-{
+{  
   var listGroups = document.getElementsByClassName('listControl');
   for (var i = 0; i < listGroups.length; i++)
   {

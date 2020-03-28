@@ -2,6 +2,9 @@
   <div class="domainsClass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div>
+      <select id="tdfDomains">
+        <option v-for="domain in domains" :key=domain.index>{{domain[0]}}</option>
+      </select>
       <!--buttons to go in here-->
     </div>
   </div>
@@ -15,8 +18,12 @@ export default {
   components: {
     CommonMainPage
   },
+  props: {
+    map: Object
+  },
   data() {
     return {
+      domains: this.map.TDFDomains,
       title: "Domains for Behaviours",
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod \
@@ -38,6 +45,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+#tdfDomains {
+  display: block;
+}
 .domainsClass {
   position: absolute;
   top: 18%;

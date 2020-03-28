@@ -1,6 +1,9 @@
 <template>
   <div class="behavioursClass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
+    <select id="behaviourSelector">
+      <option value="1">Behaviour 1</option>
+    </select>
     <div id="barrierList">
       <barrier id="barrier1"></barrier>
     </div>
@@ -61,6 +64,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+#behaviourSelector {
+  display: block;
+}
+
 .behavioursClass {
   position: absolute;
   top: 18%;
