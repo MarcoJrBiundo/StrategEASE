@@ -3,36 +3,31 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="inputs">
       <!--buttons to go in here-->
-      <div>  
+      <div>
         <h4>Who will change</h4>
-        <input type="text" placeholder="Person to change">
-        <input
-        id="addWho"
-        type="button"
-        value="+"
-        />
+        <input type="text" placeholder="Person to change" />
+        <input id="addWho" type="button" value="+" />
       </div>
-      <div class="half">  
+      <div class="half">
         <h4>What will they change</h4>
-        <input type="text" placeholder="Behaviour to change">
-        <input
-          id="addWhat"
-          type="button"
-          value="+"
-        />
+        <input type="text" placeholder="Behaviour to change" />
+        <input id="addWhat" type="button" value="+" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import db from '@/firebase/init'
+import db from "@/firebase/init";
 import CommonMainPage from "./CommonMainPage";
 
 export default {
   name: "DTIdevidence",
   components: {
     CommonMainPage
+  },
+  props: {
+    case: Object
   },
   data() {
     return {

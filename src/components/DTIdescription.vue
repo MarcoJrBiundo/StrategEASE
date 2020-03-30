@@ -14,17 +14,25 @@
     <div>
       <!--buttons to go in here-->
     </div>
+    <BottomBar :caseObject="caseObject"></BottomBar>
   </div>
 </template>
 
 <script>
-import db from '@/firebase/init'
+import db from "@/firebase/init";
 import CommonMainPage from "./CommonMainPage";
+import BottomBar from "./BottomBar";
 
 export default {
   name: "DTIdescription",
   components: {
-    CommonMainPage
+    CommonMainPage,
+    BottomBar
+  },
+  props: {
+    caseObject: {
+      type: Object
+    }
   },
   data() {
     return {

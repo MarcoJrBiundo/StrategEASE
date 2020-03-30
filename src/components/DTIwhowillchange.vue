@@ -6,18 +6,13 @@
       <div id="behaviourList">
         <behaviour id="behaviour1"></behaviour>
       </div>
-      <input
-        id="addActor"
-        v-on:click="addActor"
-        type="button"
-        value="+"
-      />
+      <input id="addActor" v-on:click="addActor" type="button" value="+" />
     </div>
   </div>
 </template>
 
 <script>
-import db from '@/firebase/init'
+import db from "@/firebase/init";
 import Vue from "vue";
 import behaviour from "@/components/behaviour";
 import CommonMainPage from "./CommonMainPage";
@@ -27,6 +22,9 @@ export default {
   components: {
     behaviour,
     CommonMainPage
+  },
+  props: {
+    case: Object
   },
   data() {
     return {

@@ -3,7 +3,9 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div>
       <select id="tdfDomains">
-        <option v-for="domain in domains" :key=domain.index>{{domain[0]}}</option>
+        <option v-for="domain in domains" :key="domain.index">{{
+          domain[0]
+        }}</option>
       </select>
       <!--buttons to go in here-->
     </div>
@@ -11,7 +13,7 @@
 </template>
 
 <script>
-import db from '@/firebase/init'
+import db from "@/firebase/init";
 import CommonMainPage from "./CommonMainPage";
 
 export default {
@@ -20,7 +22,8 @@ export default {
     CommonMainPage
   },
   props: {
-    map: Object
+    map: Object,
+    case: Object
   },
   data() {
     return {

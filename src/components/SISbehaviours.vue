@@ -7,18 +7,13 @@
     <div id="barrierList">
       <barrier id="barrier1"></barrier>
     </div>
-    <input
-      id="addBarrier"
-      v-on:click="addBarrier"
-      type="button"
-      value="+"
-    />
+    <input id="addBarrier" v-on:click="addBarrier" type="button" value="+" />
   </div>
 </template>
 
 <script>
-import db from '@/firebase/init'
-import Vue from 'vue';
+import db from "@/firebase/init";
+import Vue from "vue";
 import barrier from "./barrier";
 import CommonMainPage from "./CommonMainPage";
 
@@ -27,6 +22,9 @@ export default {
   components: {
     barrier,
     CommonMainPage
+  },
+  props: {
+    case: Object
   },
   data() {
     return {
@@ -44,12 +42,13 @@ export default {
     addBarrier: function(e) {
       var barrierList = document.getElementById("barrierList").children;
       //get the count from the id
-      var barrierCount = parseInt(barrierList[barrierList.length - 1].id.replace("barrier", "")) + 1;
+      var barrierCount =
+        parseInt(
+          barrierList[barrierList.length - 1].id.replace("barrier", "")
+        ) + 1;
 
       var newBarrier = document.createElement("DIV");
-      newBarrier.setAttribute(
-        "id", ("barrier" + barrierCount).toString()
-      );
+      newBarrier.setAttribute("id", ("barrier" + barrierCount).toString());
 
       document.getElementById("barrierList").append(newBarrier);
 
@@ -122,6 +121,6 @@ export default {
   clear: both;
   display: block;
   overflow-y: scroll;
-  max-height:450px;
+  max-height: 450px;
 }
 </style>

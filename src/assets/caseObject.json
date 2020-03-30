@@ -1,0 +1,34 @@
+{
+  "case": {
+    "description": {},
+    "evidence": {},
+    "who": {
+      "0": {
+        "name": "doctor",
+        "behaviour": {
+          "0": {
+            "description": "washing hands blah",
+            "Barriers": {
+              "0": {
+                "desciption": {},
+                "domain": {
+                  "type": {},
+                  "strategies": {
+                    "0": {
+                      "name": {},
+                      "target": {},
+                      "delivery": {},
+                      "del_strat": {},
+                      "edu_barrier": {},
+                      "adaptations": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
