@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import db from '@/firebase/init'
 import Vue from 'vue';
 
 export default {

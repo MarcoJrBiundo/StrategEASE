@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import db from '@/firebase/init'
 import Links from "./Links";
 
 export default {

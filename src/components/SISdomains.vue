@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import db from '@/firebase/init'
 import CommonMainPage from "./CommonMainPage";
 
 export default {

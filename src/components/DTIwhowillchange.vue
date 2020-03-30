@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import db from '@/firebase/init'
 import Vue from "vue";
 import behaviour from "@/components/behaviour";
 import CommonMainPage from "./CommonMainPage";
