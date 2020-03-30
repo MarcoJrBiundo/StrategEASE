@@ -51,6 +51,30 @@ export default {
         { link: "www.google.com", display: "Google 3" }
       ]
     };
+  },
+  methods: {
+    next: function(e) {
+      /**
+       * how do we tell it what part of the case object to check?
+       *
+       * check the parts of the object necessary for this page
+       *
+       *    if they are filled, do the route push
+       *
+       *    if they are not all filled/completed, move to next piece of this pages objects
+       */
+      alert("parent next method");
+      // var caseObjectLocal = caseObject;
+      // if (
+      //   caseObjectLocal.description === "" ||
+      //   caseObjectLocal.evidence === ""
+      // ) {
+      //   alert("Please finish Filling out this page");
+      // } else {
+      //   alert("moving to new route");
+      //   this.$router.push({ name: "DTIwhowillchange" });
+      // }
+    }
   }
 };
 </script>

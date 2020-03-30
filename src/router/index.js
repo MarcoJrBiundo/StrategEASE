@@ -27,31 +27,31 @@ export default new Router({
       path: "/dti-description",
       name: "DTIdescription",
       component: DTIdescription,
-      props: { case: caseObject }
+      props: { caseObject: caseObject }
     },
     {
       path: "/dti-evidence",
       name: "DTIevidence",
       component: DTIevidence,
-      props: { case: caseObject }
+      props: { caseObject: caseObject }
     },
     {
       path: "/dti-whowillchange",
       name: "DTIwhowillchange",
       component: DTIwhowillchange,
-      props: { case: caseObject }
+      props: { caseObject: caseObject }
     },
     {
       path: "/sis-behaviours",
       name: "SISbehaviours",
       component: SISbehaviours,
-      props: { case: caseObject }
+      props: { caseObject: caseObject }
     },
     {
       path: "/sis-domains",
       name: "SISdomains",
       component: SISdomains,
-      props: { map: strategyMap, case: caseObject }
+      props: { map: strategyMap, caseObject: caseObject }
     }
   ]
 });

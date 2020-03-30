@@ -4,7 +4,7 @@
     <button v-on:click="saveData()" class="botBut center">
       SAVE AND QUIT
     </button>
-    <button class="botBut right">NEXT</button>
+    <button v-on:click="next()" class="botBut right">NEXT</button>
   </div>
 </template>
 
@@ -14,7 +14,8 @@
 export default {
   name: "BottomBar",
   props: {
-    case: Object
+    case: Object,
+    nextRoute: String // for passing in the next route to go to
   },
   data() {
     return {};
@@ -24,7 +25,10 @@ export default {
       alert("saved");
     },
     back: function(e) {
-      router.go(-1);
+      this.$router.go(-1);
+    },
+    next: function(e) {
+      this.$parent.next();
     }
   }
 };
