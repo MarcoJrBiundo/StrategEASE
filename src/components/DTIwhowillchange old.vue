@@ -1,21 +1,13 @@
 <template>
   <div class="indexclass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
-    <div v-for="(actor, actorIndex) in getActors()" :key="actorIndex">
-      <input
-        :placeholder="placeholderMain"
-        v-model="actor.name"
-        class="actor"
-      />
-      <div v-for="(behav, behavIndex) in actor.behaviour" :key="behavIndex">
-        <input
-          :placeholder="placeholderSecondary"
-          v-model="behav.description"
-          class="behaviour"
-        />
+    <div class="inputs">
+      <!--buttons to go in here-->
+      <div id="behaviourList">
+        <input v-for="actor in caseObject.actors" v-bind:key="actor" />
+        <!-- <behaviour id="behaviour1"></behaviour> -->
       </div>
-      <button v-on:click="addActor()">Add Actor</button
-      ><button v-on:click="addBehaviour(actorIndex)">Add Behaviour</button>
+      <!-- <input id="addActor" v-on:click="addActor" type="button" value="+" /> -->
     </div>
   </div>
 </template>
@@ -23,20 +15,17 @@
 <script>
 import db from "@/firebase/init";
 import Vue from "vue";
-// import behaviour from "@/components/behaviour";
+import behaviour from "@/components/behaviour";
 import CommonMainPage from "./CommonMainPage";
-import AssociatedInputs from "./AssociatedInputs";
 
 export default {
   name: "DTIwhowillchange",
   components: {
-    CommonMainPage,
-    AssociatedInputs
+    behaviour,
+    CommonMainPage
   },
   props: {
-    caseObject: {
-      type: Object
-    }
+    caseObject: Object
   },
   data() {
     return {
@@ -53,44 +42,31 @@ export default {
         { link: "www.google.com", display: "Google 1" },
         { link: "www.google.com", display: "Google 2" },
         { link: "www.google.com", display: "Google 3" }
-      ],
-      placeholderMain: "Actor or Group Name",
-      placeholderSecondary: "Behavior to be Changed",
-      actors: [
-        {
-          id: 0,
-          name: "",
-          behaviour: [
-            {
-              id: 0,
-              description: ""
-            }
-          ]
-        }
       ]
     };
   },
   methods: {
-    getActors() {
-      if (this.caseObject.actors) {
-        return this.caseObject.actors;
-      } else {
-        return this.actors;
-      }
-    },
-    addActor() {
-      this.actors.push({
-        id: this.actors.length,
-        name: "",
-        behaviour: [{ id: 0, description: "" }]
-      });
-    },
-    addBehaviour(index) {
-      this.actors[index].behaviour.push({
-        id: this.actors[index].behaviour.length,
-        description: ""
-      });
-    }
+    // addActor: function(e) {
+    //   var behaviourList = document.getElementById("behaviourList").children;
+    //   //get the count from the id
+    //   var behaviourCount = behaviourList[behaviourList.length - 1].id.replace(
+    //     "behaviour",
+    //     ""
+    //   );
+    //   behaviourCount = parseInt(behaviourCount) + 1;
+    //   console.log(behaviourCount);
+    //   var newBehaviour = document.createElement("DIV");
+    //   newBehaviour.setAttribute(
+    //     "id",
+    //     ("behaviour" + behaviourCount).toString()
+    //   );
+    //   document.getElementById("behaviourList").appendChild(newBehaviour);
+    //   new Vue({
+    //     el: "#behaviour" + behaviourCount,
+    //     template: '<behaviour id="behaviour' + behaviourCount + '"/>',
+    //     components: { behaviour }
+    //   });
+    // }
   }
 };
 </script>
@@ -142,15 +118,4 @@ export default {
   height: 10%;
   top: 215;
 }
-
-/* .actor {
-  width: 48% !important;
-  float: left;
-  clear: left;
-}
-
-.behaviour {
-  width: 48% !important;
-  float: right;
-} */
 </style>

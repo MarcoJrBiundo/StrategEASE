@@ -4,19 +4,21 @@
     "name": "",
     "description": "",
     "evidence": "",
-    "actor": {
-      "0": {
-        "name": "doctor",
-        "behaviour": {
-          "0": {
-            "description": "washing hands blah",
-            "Barriers": {
-              "0": {
+    "actors": [
+      {
+        "id": 0,
+        "name": "",
+        "behaviour": [
+          {
+            "id": 0,
+            "description": "",
+            "Barriers": [
+              {
                 "desciption": {},
                 "domain": {
                   "type": {},
-                  "strategies": {
-                    "0": {
+                  "strategies": [
+                    {
                       "name": {},
                       "target": {},
                       "delivery": {},
@@ -24,13 +26,13 @@
                       "edu_barrier": {},
                       "adaptations": {}
                     }
-                  }
+                  ]
                 }
               }
-            }
+            ]
           }
-        }
+        ]
       }
-    }
+    ]
   }
 }
