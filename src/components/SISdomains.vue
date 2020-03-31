@@ -2,14 +2,16 @@
   <div class="domainsClass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div>
-      {{selectedDomain}}
-      <select id="tdfDomains" :selectedIndex="selectedDomain">
-        <option v-for="(domain,index) in domains" :value="domain[0]" :key="index">{{
+      <select id="tdfDomains" v-model="selectedDomain">
+        <option v-for="(domain,index) in domains" :value="index" :key="index">{{
           domain[0]
         }}</option>
       </select>
       <ul>
-        <li v-for="strategy in getStrategies()" :key="strategy">ASD{{strategy}}</li>
+        <li v-for="strategy in getStrategies()" :key="strategy">
+          <input type="checkbox" :id="strategy" />
+          <label :for="strategy">{{strategy}}</label>
+        </li>
       </ul>
       <!--buttons to go in here-->
     </div>
@@ -27,18 +29,19 @@ export default {
   },
   props: {
     map: Object,
-    case: Object
+    case: Object,
   },
   methods: {
     getStrategies: function()
     {
       var foundStrategies = [];
-      console.log(this.selectedDomain);
-      //this.domains[parseInt(this.selectedDomain)][1].split(',').forEach(funcIndex => {
-      //  this.intervention[parseInt(funcIndex)][1].split(',').forEach(strategyIndex => {
-      //    foundStrategies.push(this.strategies[parseInt(strategyIndex)]);
-      //  }); 
-      //});
+      
+      this.domains[this.selectedDomain][1].split(',').forEach(funcIndex => {
+        this.intervention[funcIndex][1].split(',').forEach(strategyIndex => {
+          if (foundStrategies.indexOf(this.strategies[parseInt(strategyIndex)]) < 0) 
+            foundStrategies.push(this.strategies[parseInt(strategyIndex)]);
+        }); 
+      });
 
       return foundStrategies;
     }
@@ -48,7 +51,7 @@ export default {
       domains: this.map.TDFDomains,
       intervention: this.map.InterventionFunctions,
       strategies: this.map.Strategies,
-      selectedDomain: 1,
+      selectedDomain: 0,
       title: "Domains for Behaviours",
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod \
@@ -73,6 +76,13 @@ export default {
 #tdfDomains {
   display: block;
 }
+
+.domainsClass input[type="checkbox"]{
+  display: inline;
+  position: relative;
+  opacity: 100;
+}
+
 .domainsClass {
   position: absolute;
   top: 18%;

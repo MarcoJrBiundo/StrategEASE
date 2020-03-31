@@ -10,7 +10,6 @@ import SISdomains from "@/components/SISdomains";
 
 //our main json object containing everything
 var dbObject;
-var currentCase;
 var strategyMap = require("@/assets/strategyMap.json");
 var caseObject = require("@/assets/CaseObject.json");
 
