@@ -9,8 +9,10 @@
       </select>
       <ul>
         <li v-for="strategy in getStrategies()" :key="strategy">
-          <input type="checkbox" :id="strategy" />
-          <label :for="strategy">{{strategy}}</label>
+          <div v-on:click="updateStrategy" >
+            <input type="checkbox" :id="strategy" />
+            <label :for="strategy">{{strategy}}</label>
+          </div>
         </li>
       </ul>
       <!--buttons to go in here-->
@@ -32,6 +34,17 @@ export default {
     case: Object,
   },
   methods: {
+    updateStrategy: function(e){
+      
+      if (e.target.children.length)
+      {  
+        e.target.children[0].checked = e.target.children[0].checked ? false: true;
+      }
+      else 
+      {
+        e.target.parentElement.children[0].checked = e.target.parentElement.children[0].checked ? false: true;
+      }
+    },
     getStrategies: function()
     {
       var foundStrategies = [];
