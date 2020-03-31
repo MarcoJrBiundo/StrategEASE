@@ -1,8 +1,10 @@
 {
   "case": {
+    "id": "",
+    "name": "",
     "description": "",
     "evidence": "",
-    "who": {
+    "actor": {
       "0": {
         "name": "doctor",
         "behaviour": {

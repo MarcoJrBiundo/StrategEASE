@@ -3,13 +3,13 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="inputs">
       <label for="case">Case:</label>
-      <input type="text" name="case" />
+      <input type="text" name="case" v-model="caseObject.name" />
       <label for="case">Describe the intervention you are implmenting:</label>
-      <input type="text" name="case" />
+      <input type="text" name="case" v-model="caseObject.description" />
       <label for="case"
         >Describe the evidence supporting the intervention:</label
       >
-      <input type="text" name="case" />
+      <input type="text" name="case" v-model="caseObject.evidence" />
     </div>
     <div>
       <!--buttons to go in here-->
@@ -54,26 +54,20 @@ export default {
   },
   methods: {
     next: function(e) {
-      /**
-       * how do we tell it what part of the case object to check?
-       *
-       * check the parts of the object necessary for this page
-       *
-       *    if they are filled, do the route push
-       *
-       *    if they are not all filled/completed, move to next piece of this pages objects
-       */
-      alert("parent next method");
-      // var caseObjectLocal = caseObject;
-      // if (
-      //   caseObjectLocal.description === "" ||
-      //   caseObjectLocal.evidence === ""
-      // ) {
-      //   alert("Please finish Filling out this page");
-      // } else {
-      //   alert("moving to new route");
-      //   this.$router.push({ name: "DTIwhowillchange" });
-      // }
+      // console.log(this.caseObject);
+      if (
+        this.caseObject.name &&
+        this.caseObject.description &&
+        this.caseObject.evidence &&
+        this.caseObject.name.length > 0 &&
+        this.caseObject.description.length > 0 &&
+        this.caseObject.evidence.length > 0
+      ) {
+        alert("valid");
+        this.$router.push({ path: "dti-whowillchange" });
+      } else {
+        alert("invalid");
+      }
     }
   }
 };
