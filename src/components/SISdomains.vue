@@ -2,11 +2,15 @@
   <div class="domainsClass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div>
-      <select id="tdfDomains">
-        <option v-for="domain in domains" :key="domain.index">{{
+      {{selectedDomain}}
+      <select id="tdfDomains" :selectedIndex="selectedDomain">
+        <option v-for="(domain,index) in domains" :value="domain[0]" :key="index">{{
           domain[0]
         }}</option>
       </select>
+      <ul>
+        <li v-for="strategy in getStrategies()" :key="strategy">ASD{{strategy}}</li>
+      </ul>
       <!--buttons to go in here-->
     </div>
   </div>
@@ -25,9 +29,26 @@ export default {
     map: Object,
     case: Object
   },
+  methods: {
+    getStrategies: function()
+    {
+      var foundStrategies = [];
+      console.log(this.selectedDomain);
+      //this.domains[parseInt(this.selectedDomain)][1].split(',').forEach(funcIndex => {
+      //  this.intervention[parseInt(funcIndex)][1].split(',').forEach(strategyIndex => {
+      //    foundStrategies.push(this.strategies[parseInt(strategyIndex)]);
+      //  }); 
+      //});
+
+      return foundStrategies;
+    }
+  },
   data() {
     return {
       domains: this.map.TDFDomains,
+      intervention: this.map.InterventionFunctions,
+      strategies: this.map.Strategies,
+      selectedDomain: 1,
       title: "Domains for Behaviours",
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod \

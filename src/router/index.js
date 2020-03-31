@@ -70,7 +70,7 @@ function startFunction() {
     listGroups[i].addEventListener("click", toggleListVisibility);
   }
 
-  console.log(listGroups[0]);
+  //console.log(listGroups[0]);
 
   //lists.display = "block";
   //console.log(groups);
