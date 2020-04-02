@@ -1,4 +1,5 @@
-"actors": [
+{
+  "actors": [
     {
       "name": "",
       "behaviour": [
@@ -26,3 +27,4 @@
       ]
     }
   ]
+}
