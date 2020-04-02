@@ -17,6 +17,7 @@
       <button v-on:click="addActor()">Add Actor</button>
       <button v-on:click="addBehaviour(actorIndex)">Add Behaviour</button>
     </div>
+    <BottomBar :caseObject="caseObject"></BottomBar>
   </div>
 </template>
 
@@ -26,12 +27,14 @@ import Vue from "vue";
 // import behaviour from "@/components/behaviour";
 import CommonMainPage from "./CommonMainPage";
 import AssociatedInputs from "./AssociatedInputs";
+import BottomBar from "./BottomBar";
 
 export default {
   name: "DTIwhowillchange",
   components: {
     CommonMainPage,
-    AssociatedInputs
+    AssociatedInputs,
+    BottomBar
   },
   props: {
     caseObject: {
@@ -59,10 +62,12 @@ export default {
       actors: [
         {
           id: 0,
+          valid: false,
           name: "",
           behaviour: [
             {
               id: 0,
+              valid: false,
               description: ""
             }
           ]
@@ -71,6 +76,26 @@ export default {
     };
   },
   methods: {
+    next: function(e) {
+      console.log(this.actors);
+      console.log(this.caseObject);
+      this.actors.forEach(actor => {
+        if (actor.name.length > 0) {
+          actor.valid = true;
+
+          // console.log(actor.behaviour);
+
+          for (var i = 0; i < actor.behaviour.length; i++) {
+            if (actor.behaviour[i].length > 0) {
+              actor.behaviour[i].valid = true;
+            }
+          }
+        }
+      });
+      alert("valid");
+      this.caseObject.case.actors = this.actors;
+      this.$router.push({ path: "sis-behaviours" });
+    },
     getActors() {
       if (this.caseObject.actors) {
         return this.caseObject.actors;
@@ -81,6 +106,7 @@ export default {
     addActor() {
       this.actors.push({
         id: this.actors.length,
+        valid: false,
         name: "",
         behaviour: [{ id: 0, description: "" }]
       });
@@ -88,6 +114,7 @@ export default {
     addBehaviour(index) {
       this.actors[index].behaviour.push({
         id: this.actors[index].behaviour.length,
+        valid: false,
         description: ""
       });
     }
