@@ -24,7 +24,7 @@ export default {
     CommonMainPage
   },
   props: {
-    case: Object
+    caseObject: Object
   },
   data() {
     return {

@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    next: function(e) {
+    next: function() {
       // console.log(this.caseObject);
       if (
         this.caseObject.name &&
@@ -68,7 +68,8 @@ export default {
       } else {
         alert("invalid");
       }
-    }
+    },
+    validate: function() {}
   }
 };
 </script>

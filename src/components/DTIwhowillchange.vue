@@ -1,7 +1,7 @@
 <template>
   <div class="indexclass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
-    <div v-for="(actor, actorIndex) in getActors()" :key="actorIndex">
+    <div v-for="(actor, actorIndex) in actors" :key="actorIndex">
       <input
         :placeholder="placeholderMain"
         v-model="actor.name"
@@ -59,62 +59,69 @@ export default {
       ],
       placeholderMain: "Actor or Group Name",
       placeholderSecondary: "Behavior to be Changed",
-      actors: [
-        {
-          id: 0,
-          valid: false,
-          name: "",
-          behaviour: [
-            {
-              id: 0,
-              valid: false,
-              description: ""
-            }
-          ]
-        }
-      ]
+      actors: this.caseObject.case.actors
     };
   },
   methods: {
-    next: function(e) {
-      console.log(this.actors);
-      console.log(this.caseObject);
+    next: function() {
+      /**
+       * this method calls the save function and then moves to the next page
+       */
+      this.validate();
+      this.$router.push({ path: "sis-behaviours" });
+    },
+    validate: function() {
+      // a local object to hold the filtered values
+      var localActors = [];
+
+      /**
+       * filters the actors dependent on the actor name havng a length and
+       * if any of the child behaviours have lengths
+       */
       this.actors.forEach(actor => {
         if (actor.name.length > 0) {
-          actor.valid = true;
-
-          // console.log(actor.behaviour);
-
+          var toAdd = false;
           for (var i = 0; i < actor.behaviour.length; i++) {
-            if (actor.behaviour[i].length > 0) {
-              actor.behaviour[i].valid = true;
+            if (actor.behaviour.length > 0) {
+              toAdd = true;
+              break;
             }
+          }
+          if (toAdd) {
+            localActors.push(actor);
           }
         }
       });
-      alert("valid");
-      this.caseObject.case.actors = this.actors;
-      this.$router.push({ path: "sis-behaviours" });
-    },
-    getActors() {
-      if (this.caseObject.actors) {
-        return this.caseObject.actors;
-      } else {
-        return this.actors;
+
+      /**
+       * filters the behaviours for each actor so that only valid actors
+       * with a length are added
+       */
+      for (var i = 0; i < localActors.length; i++) {
+        localActors[i].behaviour = localActors[i].behaviour.filter(
+          value => value.description.length > 0
+        );
       }
+
+      // assigns it to the main object again
+      this.actors = localActors;
     },
     addActor() {
+      /**
+       * adds a new actor to the list of actors
+       */
       this.actors.push({
         id: this.actors.length,
-        valid: false,
         name: "",
         behaviour: [{ id: 0, description: "" }]
       });
     },
     addBehaviour(index) {
+      /**
+       * adds a new behaviour to the current list of behaviours
+       */
       this.actors[index].behaviour.push({
         id: this.actors[index].behaviour.length,
-        valid: false,
         description: ""
       });
     }
