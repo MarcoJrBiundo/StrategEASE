@@ -1,13 +1,33 @@
 <template>
   <div class="behavioursClass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
-    <select id="behaviourSelector">
-      <option value="1">Behaviour 1</option>
-    </select>
-    <div id="barrierList">
-      <barrier id="barrier1"></barrier>
+    <div class="barrier">
+      <select id="behaviourSelector">
+        <option value="1">Behaviour 1</option>
+      </select>
+      <div v-for="(barrier, barrierIndex) in barriers" :key=barrierIndex id="barrierList">
+        <input
+        placeholder="Reason for behaviour"
+        type="text"
+        name="barrier"
+        group="barriers"
+        />
+        <span class="barriers">
+          <select v-model=selectedDomain id="tdfDomains">
+            <option v-for="(domain, domainIndex) in domains" :value="index" :key=domainIndex>{{
+              domain[0]
+            }}</option>
+          </select>
+          <input
+            id="addDomain"
+            v-on:click="addDomain"
+            type="button"
+            value="Add Domain"
+          />
+        </span>
+      </div>
+      <input id="addBarrier" v-on:click="addBarrier" type="button" value="+" />
     </div>
-    <input id="addBarrier" v-on:click="addBarrier" type="button" value="+" />
   </div>
 </template>
 
@@ -24,20 +44,18 @@ export default {
     CommonMainPage
   },
   props: {
+    map: Object,
     case: Object
   },
   data() {
     return {
-      behaviours: [
+      domains: this.map.TDFDomains,
+      selectedDomain: 0,
+      barriers: [
         {
           "id": 0,
           "description": "",
-          "Barriers": [
-            {
-              "desciption": "",
-              "domain": ""
-            }
-          ]
+          "domains": []
         }
       ],
       title: "Behaviours to change",
@@ -51,29 +69,16 @@ export default {
     };
   },
   methods: {
-    getBehaviours: function(e) {
-      this.case.actors.behaviours;
-
-      return [];
-    },
     addBarrier: function(e) {
-      var barrierList = document.getElementById("barrierList").children;
-      //get the count from the id
-      var barrierCount =
-        parseInt(
-          barrierList[barrierList.length - 1].id.replace("barrier", "")
-        ) + 1;
-
-      var newBarrier = document.createElement("DIV");
-      newBarrier.setAttribute("id", ("barrier" + barrierCount).toString());
-
-      document.getElementById("barrierList").append(newBarrier);
-
-      new Vue({
-        el: "#barrier" + barrierCount,
-        template: '<barrier id="barrier' + barrierCount + '"/>',
-        components: { barrier }
+      this.barriers.push({
+        id: this.barriers.length,
+        description: "",
+        domains: []
       });
+    },
+    addDomain: function(e) {
+      console.log(this.barriers);
+      this.barriers.domains.push("");
     }
   }
 };
@@ -81,6 +86,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.barriers, .barrier input[type=text], .barrier select {
+  width: 48%;
+}
+.barrier select {
+    display: inline;
+}
+.barriers input[type=button]{
+  margin-left: 48.5%;
+  display: block;
+}
+.barrier {
+    clear: both;
+}
+
 #behaviourSelector {
   display: block;
 }

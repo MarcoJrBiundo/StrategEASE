@@ -14,8 +14,9 @@
             "description": "",
             "Barriers": [
               {
-                "desciption": "",
-                "domain": ""
+                "id": 0,
+                "description": "",
+                "domains": ""
               }
             ]
           }

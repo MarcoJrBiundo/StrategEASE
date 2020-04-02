@@ -45,13 +45,13 @@ export default new Router({
       path: "/sis-behaviours",
       name: "SISbehaviours",
       component: SISbehaviours,
-      props: { caseObject: caseObject }
+      props: { map: strategyMap, caseObject: caseObject }
     },
     {
       path: "/sis-domains",
       name: "SISdomains",
       component: SISdomains,
-      props: { map: strategyMap, caseObject: caseObject }
+      props: { caseObject: caseObject }
     },
     {
       path: "/os-strategy",
