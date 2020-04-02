@@ -3,7 +3,7 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="userInput">
       <label for="strategySelector">Choose a Strategy</label>
-      <select id="strategySelector">
+      <select v-model=strategies.name id="strategySelector">
         <option value="1">Strategy 1</option>
       </select>
       <br />
@@ -47,24 +47,15 @@ export default {
   },
   data() {
     return {
-      title: "Operationalizing Implementation Strategies",
       case: this.caseObject,
+      strategies: this.caseObject.case.strategies,
+      title: "Operationalizing Implementation Strategies",
       text:
         "Map the chosen strategies to the actors.",
       links: [
         { link: "www.google.com", display: "Google 1" },
         { link: "www.google.com", display: "Google 2" },
         { link: "www.google.com", display: "Google 3" }
-      ],
-      strategies: [
-        {
-          name: "",
-          target: "",
-          delivery: "",
-          del_strat: "",
-          edu_barrier: "",
-          adaptations: ""
-        }
       ]
     };
   }

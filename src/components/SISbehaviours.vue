@@ -28,6 +28,18 @@ export default {
   },
   data() {
     return {
+      behaviours: [
+        {
+          "id": 0,
+          "description": "",
+          "Barriers": [
+            {
+              "desciption": "",
+              "domain": ""
+            }
+          ]
+        }
+      ],
       title: "Behaviours to change",
       text:
         "Map each behaviour to domain(s) and list the involved barriers for each behaviour.",
@@ -39,6 +51,11 @@ export default {
     };
   },
   methods: {
+    getBehaviours: function(e) {
+      this.case.actors.behaviours;
+
+      return [];
+    },
     addBarrier: function(e) {
       var barrierList = document.getElementById("barrierList").children;
       //get the count from the id
