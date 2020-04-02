@@ -8,23 +8,23 @@
       </select>
       <br />
       <label for="actorSelector">Who is the Strategy targeting?</label>
-      <select id="actorSelector">
+      <select v-model=strategies.target id="actorSelector">
         <option value="1">Actor 1</option>
       </select>
       <br />
       <label for="deliveryActorText">Who will deliver the Strategy?</label>
-      <input type="text" id="deliveryText" placeholder="Upper Management">
+      <input v-model=strategies.delivery type="text" id="deliveryActorText" placeholder="Upper Management">
       <br />
       <label for="deliveryMethodText">How will you deliver the Strategy?</label>
-      <input type="text" id="deliveryText" placeholder="e.g number of times, length of time...">
+      <input v-model=strategies.del_strat type="text" id="deliveryMethodText" placeholder="e.g number of times, length of time...">
       <br />
       <label for="barrierSelector">What Barriers are being targeted?</label>
-      <select id="barrierSelector">
+      <select v-model=strategies.edu_barrier id="barrierSelector">
         <option value="1">Barrier 1</option>
       </select>
       <br />
       <label for="adaptationsText">What adaptations might you consider?</label>
-      <input type="text" id="adaptationsText">
+      <input v-model=strategies.adaptations type="text" id="adaptationsText">
     </div>
   </div>
 </template>
@@ -43,20 +43,28 @@ export default {
     AssociatedInputs
   },
   props: {
-    caseObject: {
-      type: Object
-    }
+    caseObject: Object
   },
   data() {
     return {
       title: "Operationalizing Implementation Strategies",
-      caseObject: caseObject,
+      case: this.caseObject,
       text:
         "Map the chosen strategies to the actors.",
       links: [
         { link: "www.google.com", display: "Google 1" },
         { link: "www.google.com", display: "Google 2" },
         { link: "www.google.com", display: "Google 3" }
+      ],
+      strategies: [
+        {
+          name: "",
+          target: "",
+          delivery: "",
+          del_strat: "",
+          edu_barrier: "",
+          adaptations: ""
+        }
       ]
     };
   }
