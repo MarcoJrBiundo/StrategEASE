@@ -1,7 +1,7 @@
 <template>
   <div class="bottomBar">
     <button v-on:click="back()" class="botBut left">BACK</button>
-    <button v-on:click="saveData()" class="botBut center">
+    <button v-on:click="saveAndQuit()" class="botBut center">
       SAVE AND QUIT
     </button>
     <button v-on:click="next()" class="botBut right">NEXT</button>
@@ -21,13 +21,22 @@ export default {
     return {};
   },
   methods: {
-    saveData: function(e) {
-      alert("saved");
+    saveAndQuit: function(e) {
+      /**
+       * calls validation for parent and then saves to database and
+       * then routes to home page
+       */
+      this.$parent.validate();
+      this.$router.push({ path: "/" });
     },
     back: function(e) {
+      /** takes user back one page */
       this.$router.go(-1);
     },
     next: function(e) {
+      /** calls parent next function to validate
+       *  and move to the next page
+       */
       this.$parent.next();
     }
   }

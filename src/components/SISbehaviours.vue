@@ -45,7 +45,7 @@ export default {
   },
   props: {
     map: Object,
-    case: Object
+    caseObject: Object
   },
   data() {
     return {
