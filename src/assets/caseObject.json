@@ -14,24 +14,22 @@
             "description": "",
             "Barriers": [
               {
-                "desciption": {},
-                "domain": {
-                  "type": {},
-                  "strategies": [
-                    {
-                      "name": {},
-                      "target": {},
-                      "delivery": {},
-                      "del_strat": {},
-                      "edu_barrier": {},
-                      "adaptations": {}
-                    }
-                  ]
-                }
+                "desciption": "",
+                "domain": ""
               }
             ]
           }
         ]
+      }
+    ],
+    "strategies": [
+      {
+        "name": "",
+        "target": "",
+        "delivery": "",
+        "del_strat": "",
+        "edu_barrier": "",
+        "adaptations": ""
       }
     ]
   }
