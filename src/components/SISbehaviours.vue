@@ -2,28 +2,23 @@
   <div class="behavioursClass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="barrier">
-      <select id="behaviourSelector">
-        <option value="1">Behaviour 1</option>
+      <select>
+        <span v-for="(actor, actorIndex) in actors" :key=actorIndex>
+          <option v-for="(behaviour, behaviourIndex) in actors[actorIndex].behaviours" :key=behaviourIndex :value=behaviourIndex>{{behaviour}}</option>
+        </span>
       </select>
+      
       <div v-for="(barrier, barrierIndex) in barriers" :key=barrierIndex id="barrierList">
-        <input
-        placeholder="Reason for behaviour"
-        type="text"
-        name="barrier"
-        group="barriers"
-        />
+        <input placeholder="Reason for behaviour" type="text" name="barrier" group="barriers" />
+        
         <span class="barriers">
-          <select v-model=selectedDomain id="tdfDomains">
-            <option v-for="(domain, domainIndex) in domains" :value="index" :key=domainIndex>{{
+          <select v-for="(domainItem, domainItemIndex) in barriers[barrierIndex].domains" :key=domainItemIndex>
+            <option v-for="(domain, domainIndex) in domains" :value=domainIndex :key=domainIndex>{{
               domain[0]
             }}</option>
           </select>
-          <input
-            id="addDomain"
-            v-on:click="addDomain"
-            type="button"
-            value="Add Domain"
-          />
+        
+          <input v-on:click="addDomain(barrierIndex)" type="button" value="Add Domain" />
         </span>
       </div>
       <input id="addBarrier" v-on:click="addBarrier" type="button" value="+" />
@@ -50,12 +45,13 @@ export default {
   data() {
     return {
       domains: this.map.TDFDomains,
-      selectedDomain: 0,
+      actors: this.caseObject.case.actors,
+      selectedDomain: [0],
       barriers: [
         {
           "id": 0,
           "description": "",
-          "domains": []
+          "domains": [""]
         }
       ],
       title: "Behaviours to change",
@@ -73,12 +69,11 @@ export default {
       this.barriers.push({
         id: this.barriers.length,
         description: "",
-        domains: []
+        domains: [""]
       });
     },
-    addDomain: function(e) {
-      console.log(this.barriers);
-      this.barriers.domains.push("");
+    addDomain: function(barrierIndex) {
+      this.barriers[barrierIndex].domains.push("");
     }
   }
 };

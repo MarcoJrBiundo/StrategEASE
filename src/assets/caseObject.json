@@ -12,11 +12,11 @@
           {
             "id": 0,
             "description": "",
-            "Barriers": [
+            "barriers": [
               {
                 "id": 0,
                 "description": "",
-                "domains": ""
+                "domains": [""]
               }
             ]
           }
