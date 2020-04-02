@@ -14,8 +14,8 @@
           class="behaviour"
         />
       </div>
-      <button v-on:click="addActor()">Add Actor</button
-      ><button v-on:click="addBehaviour(actorIndex)">Add Behaviour</button>
+      <button v-on:click="addActor()">Add Actor</button>
+      <button v-on:click="addBehaviour(actorIndex)">Add Behaviour</button>
     </div>
   </div>
 </template>

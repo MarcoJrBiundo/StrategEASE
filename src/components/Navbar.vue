@@ -2,7 +2,7 @@
   <div class="sidenavi">
     <ul>
       <li>
-        <a class="listControl" href="#intervention">Intervention</a>
+        <a class="listControl">Intervention</a>
         <ul class="sublists" hidden>
           <li class="leftSpacing">
             <router-link :to="{ name: 'DTIdescription' }">
@@ -24,7 +24,7 @@
         </ul>
       </li>
       <li>
-        <a class="listControl" href="#implementation">Implementation</a>
+        <a class="listControl">Implementation</a>
         <ul class="sublists" hidden>
           <li class="leftSpacing">
             <router-link :to="{ name: 'SISbehaviours' }">
@@ -39,12 +39,15 @@
         </ul>
       </li>
       <li>
-        <a class="listControl" href="#operationalize">Operationalize</a>
+        <a class="listControl">Operationalize</a>
         <ul class="sublists" hidden>
-          <li>Strategies</li>
+          <li class="leftSpacing">
+            <router-link :to="{ name: 'OSStrategy' }" >
+              Strategies
+            </router-link>
+          </li>
         </ul>
       </li>
-
       <li><a href="#summary">Summary</a></li>
     </ul>
   </div>
@@ -62,6 +65,10 @@ export default {
 <style>
 .leftSpacing {
   margin-left: 15px;
+}
+
+.listControl:hover {
+  cursor: pointer;
 }
 
 .sidenavi {

@@ -7,6 +7,7 @@ import DTIwhowillchange from "@/components/DTIwhowillchange";
 import SISbehaviours from "@/components/SISbehaviours";
 import behaviour from "@/components/behaviour";
 import SISdomains from "@/components/SISdomains";
+import OSStrategy from "@/components/OSStrategy";
 
 //our main json object containing everything
 var dbObject;
@@ -50,6 +51,12 @@ export default new Router({
       path: "/sis-domains",
       name: "SISdomains",
       component: SISdomains,
+      props: { map: strategyMap, caseObject: caseObject }
+    },
+    {
+      path: "/os-strategy",
+      name: "OSStrategy",
+      component: OSStrategy,
       props: { map: strategyMap, caseObject: caseObject }
     }
   ]
