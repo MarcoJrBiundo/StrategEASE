@@ -5,7 +5,6 @@ import DTIdescription from "@/components/DTIdescription";
 import DTIevidence from "@/components/DTIevidence";
 import DTIwhowillchange from "@/components/DTIwhowillchange";
 import SISbehaviours from "@/components/SISbehaviours";
-import behaviour from "@/components/behaviour";
 import SISdomains from "@/components/SISdomains";
 import OSStrategy from "@/components/OSStrategy";
 
@@ -21,45 +20,45 @@ export default new Router({
     {
       path: "/",
       name: "Index",
-      component: Index
+      component: Index,
     },
     {
       path: "/dti-description",
       name: "DTIdescription",
       component: DTIdescription,
-      props: { caseObject: caseObject }
+      props: { caseObject: caseObject },
     },
     {
       path: "/dti-evidence",
       name: "DTIevidence",
       component: DTIevidence,
-      props: { caseObject: caseObject }
+      props: { caseObject: caseObject },
     },
     {
       path: "/dti-whowillchange",
       name: "DTIwhowillchange",
       component: DTIwhowillchange,
-      props: { caseObject: caseObject }
+      props: { caseObject: caseObject },
     },
     {
       path: "/sis-behaviours",
       name: "SISbehaviours",
       component: SISbehaviours,
-      props: { map: strategyMap, caseObject: caseObject }
+      props: { map: strategyMap, caseObject: caseObject },
     },
     {
       path: "/sis-domains",
       name: "SISdomains",
       component: SISdomains,
-      props: { caseObject: caseObject }
+      props: { caseObject: caseObject },
     },
     {
       path: "/os-strategy",
       name: "OSStrategy",
       component: OSStrategy,
-      props: { map: strategyMap, caseObject: caseObject }
-    }
-  ]
+      props: { map: strategyMap, caseObject: caseObject },
+    },
+  ],
 });
 
 window.addEventListener("load", startFunction);

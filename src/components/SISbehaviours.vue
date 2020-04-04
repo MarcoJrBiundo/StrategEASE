@@ -3,22 +3,47 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="barrier">
       <select>
-        <span v-for="(actor, actorIndex) in actors" :key=actorIndex>
-          <option v-for="(behaviour, behaviourIndex) in actors[actorIndex].behaviours" :key=behaviourIndex :value=behaviourIndex>{{behaviour}}</option>
+        <span v-for="(actor, actorIndex) in actors" :key="actorIndex">
+          <option
+            v-for="(behaviour, behaviourIndex) in actors[actorIndex].behaviours"
+            :key="behaviourIndex"
+            :value="behaviourIndex"
+            >{{ behaviour }}</option
+          >
         </span>
       </select>
-      
-      <div v-for="(barrier, barrierIndex) in barriers" :key=barrierIndex id="barrierList">
-        <input placeholder="Reason for behaviour" type="text" name="barrier" group="barriers" />
-        
+
+      <div
+        v-for="(barrier, barrierIndex) in barriers"
+        :key="barrierIndex"
+        id="barrierList"
+      >
+        <input
+          placeholder="Reason for behaviour"
+          type="text"
+          name="barrier"
+          group="barriers"
+        />
+
         <span class="barriers">
-          <select v-for="(domainItem, domainItemIndex) in barriers[barrierIndex].domains" :key=domainItemIndex>
-            <option v-for="(domain, domainIndex) in domains" :value=domainIndex :key=domainIndex>{{
-              domain[0]
-            }}</option>
+          <select
+            v-for="(domainItem, domainItemIndex) in barriers[barrierIndex]
+              .domains"
+            :key="domainItemIndex"
+          >
+            <option
+              v-for="(domain, domainIndex) in domains"
+              :value="domainIndex"
+              :key="domainIndex"
+              >{{ domain[0] }}</option
+            >
           </select>
-        
-          <input v-on:click="addDomain(barrierIndex)" type="button" value="Add Domain" />
+
+          <input
+            v-on:click="addDomain(barrierIndex)"
+            type="button"
+            value="Add Domain"
+          />
         </span>
       </div>
       <input id="addBarrier" v-on:click="addBarrier" type="button" value="+" />
@@ -29,18 +54,18 @@
 <script>
 import db from "@/firebase/init";
 import Vue from "vue";
-import barrier from "./barrier";
+// import barrier from "./barrier";
 import CommonMainPage from "./CommonMainPage";
 
 export default {
   name: "SISbehaviours",
   components: {
-    barrier,
-    CommonMainPage
+    // barrier,
+    CommonMainPage,
   },
   props: {
     map: Object,
-    caseObject: Object
+    caseObject: Object,
   },
   data() {
     return {
@@ -49,10 +74,10 @@ export default {
       selectedDomain: [0],
       barriers: [
         {
-          "id": 0,
-          "description": "",
-          "domains": [""]
-        }
+          id: 0,
+          description: "",
+          domains: [""],
+        },
       ],
       title: "Behaviours to change",
       text:
@@ -60,39 +85,41 @@ export default {
       links: [
         { link: "www.google.com", display: "Google 1" },
         { link: "www.google.com", display: "Google 2" },
-        { link: "www.google.com", display: "Google 3" }
-      ]
+        { link: "www.google.com", display: "Google 3" },
+      ],
     };
   },
   methods: {
-    addBarrier: function(e) {
+    addBarrier: function (e) {
       this.barriers.push({
         id: this.barriers.length,
         description: "",
-        domains: [""]
+        domains: [""],
       });
     },
-    addDomain: function(barrierIndex) {
+    addDomain: function (barrierIndex) {
       this.barriers[barrierIndex].domains.push("");
-    }
-  }
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.barriers, .barrier input[type=text], .barrier select {
+.barriers,
+.barrier input[type="text"],
+.barrier select {
   width: 48%;
 }
 .barrier select {
-    display: inline;
+  display: inline;
 }
-.barriers input[type=button]{
+.barriers input[type="button"] {
   margin-left: 48.5%;
   display: block;
 }
 .barrier {
-    clear: both;
+  clear: both;
 }
 
 #behaviourSelector {

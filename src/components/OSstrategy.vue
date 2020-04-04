@@ -3,28 +3,42 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="userInput">
       <label for="strategySelector">Choose a Strategy</label>
-      <select v-model=strategies.name id="strategySelector">
+      <select v-model="strategies.name" id="strategySelector">
         <option value="1">Strategy 1</option>
       </select>
       <br />
       <label for="actorSelector">Who is the Strategy targeting?</label>
-      <select v-model=strategies.target id="actorSelector">
+      <select v-model="strategies.target" id="actorSelector">
         <option value="1">Actor 1</option>
       </select>
       <br />
       <label for="deliveryActorText">Who will deliver the Strategy?</label>
-      <input v-model=strategies.delivery type="text" id="deliveryActorText" placeholder="Upper Management">
+      <input
+        v-model="strategies.delivery"
+        type="text"
+        id="deliveryActorText"
+        placeholder="Upper Management"
+      />
       <br />
       <label for="deliveryMethodText">How will you deliver the Strategy?</label>
-      <input v-model=strategies.del_strat type="text" id="deliveryMethodText" placeholder="e.g number of times, length of time...">
+      <input
+        v-model="strategies.del_strat"
+        type="text"
+        id="deliveryMethodText"
+        placeholder="e.g number of times, length of time..."
+      />
       <br />
       <label for="barrierSelector">What Barriers are being targeted?</label>
-      <select v-model=strategies.edu_barrier id="barrierSelector">
+      <select v-model="strategies.edu_barrier" id="barrierSelector">
         <option value="1">Barrier 1</option>
       </select>
       <br />
       <label for="adaptationsText">What adaptations might you consider?</label>
-      <input v-model=strategies.adaptations type="text" id="adaptationsText">
+      <input
+        v-model="strategies.adaptations"
+        type="text"
+        id="adaptationsText"
+      />
     </div>
   </div>
 </template>
@@ -32,42 +46,39 @@
 <script>
 import db from "@/firebase/init";
 import Vue from "vue";
-// import behaviour from "@/components/behaviour";
 import CommonMainPage from "./CommonMainPage";
-import AssociatedInputs from "./AssociatedInputs";
 
 export default {
   name: "OSStrategy",
   components: {
     CommonMainPage,
-    AssociatedInputs
+    // AssociatedInputs,
   },
   props: {
-    caseObject: Object
+    caseObject: Object,
   },
   data() {
     return {
       case: this.caseObject,
       strategies: this.caseObject.case.strategies,
       title: "Operationalizing Implementation Strategies",
-      text:
-        "Map the chosen strategies to the actors.",
+      text: "Map the chosen strategies to the actors.",
       links: [
         { link: "www.google.com", display: "Google 1" },
         { link: "www.google.com", display: "Google 2" },
-        { link: "www.google.com", display: "Google 3" }
-      ]
+        { link: "www.google.com", display: "Google 3" },
+      ],
     };
-  }
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.userInput{
+.userInput {
   clear: both;
 }
-.userInput label{
+.userInput label {
   font-size: 1.2em;
 }
 select {

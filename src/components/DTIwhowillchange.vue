@@ -24,22 +24,20 @@
 <script>
 import db from "@/firebase/init";
 import Vue from "vue";
-// import behaviour from "@/components/behaviour";
 import CommonMainPage from "./CommonMainPage";
-import AssociatedInputs from "./AssociatedInputs";
 import BottomBar from "./BottomBar";
 
 export default {
   name: "DTIwhowillchange",
   components: {
     CommonMainPage,
-    AssociatedInputs,
-    BottomBar
+    // AssociatedInputs,
+    BottomBar,
   },
   props: {
     caseObject: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   data() {
     return {
@@ -55,22 +53,22 @@ export default {
       links: [
         { link: "www.google.com", display: "Google 1" },
         { link: "www.google.com", display: "Google 2" },
-        { link: "www.google.com", display: "Google 3" }
+        { link: "www.google.com", display: "Google 3" },
       ],
       placeholderMain: "Actor or Group Name",
       placeholderSecondary: "Behavior to be Changed",
-      actors: this.caseObject.case.actors
+      actors: this.caseObject.case.actors,
     };
   },
   methods: {
-    next: function() {
+    next: function () {
       /**
        * this method calls the save function and then moves to the next page
        */
       this.validate();
       this.$router.push({ path: "sis-behaviours" });
     },
-    validate: function() {
+    validate: function () {
       // a local object to hold the filtered values
       var localActors = [];
 
@@ -78,7 +76,7 @@ export default {
        * filters the actors dependent on the actor name havng a length and
        * if any of the child behaviours have lengths
        */
-      this.actors.forEach(actor => {
+      this.actors.forEach((actor) => {
         if (actor.name.length > 0) {
           var toAdd = false;
           for (var i = 0; i < actor.behaviour.length; i++) {
@@ -99,7 +97,7 @@ export default {
        */
       for (var i = 0; i < localActors.length; i++) {
         localActors[i].behaviour = localActors[i].behaviour.filter(
-          value => value.description.length > 0
+          (value) => value.description.length > 0
         );
       }
 
@@ -113,7 +111,7 @@ export default {
       this.actors.push({
         id: this.actors.length,
         name: "",
-        behaviour: [{ id: 0, description: "" }]
+        behaviour: [{ id: 0, description: "" }],
       });
     },
     addBehaviour(index) {
@@ -122,10 +120,10 @@ export default {
        */
       this.actors[index].behaviour.push({
         id: this.actors[index].behaviour.length,
-        description: ""
+        description: "",
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
