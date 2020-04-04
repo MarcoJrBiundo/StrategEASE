@@ -60,20 +60,26 @@ export default {
       actors: this.caseObject.case.actors,
     };
   },
+  mounted: function () {
+    if (this.actors.length < 1) {
+      this.addActor();
+      // addBehaviour();
+    }
+  },
   methods: {
     next: function () {
       /**
        * this method calls the save function and then moves to the next page
        */
       this.validate();
-      this.$router.push({ path: "sis-behaviours" });
+      // this.$router.push({ path: "sis-behaviours" });
     },
     validate: function () {
       // a local object to hold the filtered values
       var localActors = [];
 
       /**
-       * filters the actors dependent on the actor name havng a length and
+       * filters the actors dependent on the actor name having a length and
        * if any of the child behaviours have lengths
        */
       this.actors.forEach((actor) => {
@@ -100,9 +106,7 @@ export default {
           (value) => value.description.length > 0
         );
       }
-
-      // assigns it to the main object again
-      this.actors = localActors;
+      this.caseObject.case.actors = localActors;
     },
     addActor() {
       /**
