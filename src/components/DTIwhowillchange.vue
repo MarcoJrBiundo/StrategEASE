@@ -72,7 +72,19 @@ export default {
        * this method calls the save function and then moves to the next page
        */
       this.validate();
-      // this.$router.push({ path: "sis-behaviours" });
+      console.log(this.actors[0].name);
+      console.log(this.actors[0].behaviour[0].description);
+
+      if (
+        this.actors.length > 0 &&
+        this.actors[0].name.length > 0 &&
+        this.actors[0].behaviour.length > 0 &&
+        this.actors[0].behaviour[0].description.length > 0
+      ) {
+        this.$router.push({ path: "sis-behaviours" });
+      } else {
+        alert("Invalid");
+      }
     },
     validate: function () {
       // a local object to hold the filtered values
@@ -86,7 +98,7 @@ export default {
         if (actor.name.length > 0) {
           var toAdd = false;
           for (var i = 0; i < actor.behaviour.length; i++) {
-            if (actor.behaviour.length > 0) {
+            if (actor.behaviour[i].description.length > 0) {
               toAdd = true;
               break;
             }
