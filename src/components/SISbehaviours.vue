@@ -6,10 +6,12 @@
         <select>
           <optgroup v-for="(behaviours, behaviourListIndex) in getBehaviours()"
               :key="behaviourListIndex"
+              :v-model=actorSelected
               :label="behaviours.actorName"
               >
             <option v-for="(behaviour, behaviourIndex) in behaviours.behaviourList"
               :key="behaviourIndex"
+              :v-model=behaviourSelected
               :value="behaviourIndex"
               >{{ behaviour }}</option
             >
@@ -17,7 +19,7 @@
         </select>
 
         <div
-          v-for="(barrier, barrierIndex) in barriers"
+          v-for="(barrier, barrierIndex) in getBarriers()"
           :key="barrierIndex"
           id="barrierList"
         >
@@ -81,7 +83,10 @@ export default {
     return {
       domains: this.map.TDFDomains,
       actors: this.caseObject.case.actors,
+      actorSelected: 0,
+      behaviourSelected: 0,
       selectedDomain: [0],
+      barriers: [{id: 0, description: "", domains: [""]}],
       title: "Behaviours to change",
       text:
         "Map each behaviour to domain(s) and list the involved barriers for each behaviour.",
@@ -93,6 +98,15 @@ export default {
     };
   },
   methods: {
+    getBarriers: function (e){
+      var barriers = this.caseObject.case
+        .actors[this.actorSelected]
+        .behaviour[this.behaviourSelected]
+        .barrier;
+      if (barriers == null)
+        return [{id: 0, description: "", domains: [""]}];
+      return barriers;
+    },
     getBehaviours: function (e){
       var behaviours = [];
       for (var actorIndex in this.actors)
