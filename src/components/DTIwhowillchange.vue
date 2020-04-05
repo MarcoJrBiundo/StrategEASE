@@ -59,9 +59,9 @@ export default {
       text:
         "Identify who is involved (e.g., clinicians, teachers, the public) and what they need to do differently in your intervention (e.g., what they need to change to align with the practice, procedure, policy or program you are trying to implement). You can identify multiple groups and multiple changes for each group if necessary.",
       links: [
-        { link: "www.google.com", display: "Google 1" },
-        { link: "www.google.com", display: "Google 2" },
-        { link: "www.google.com", display: "Google 3" },
+        { link: "www.google.com", display: "www.habits.com" },
+        { link: "www.google.com", display: "www.breakinghabits.org" },
+        { link: "www.google.com", display: "www.implement.com" },
       ],
       placeholderMain: "Actor or Group Name",
       placeholderSecondary: "Behavior to be Changed",

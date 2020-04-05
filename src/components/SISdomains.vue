@@ -71,19 +71,13 @@ export default {
       intervention: this.map.InterventionFunctions,
       strategies: this.map.Strategies,
       selectedDomain: 0,
-      title: "Domains for Behaviours",
+      title: "Selecting Strategies",
       text:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod \
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim \
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea \
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate \
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint \
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt \
-        mollit anim id est laborum.",
+        "For each domian in the drop down please select one or more strategies",
       links: [
-        { link: "www.google.com", display: "Google 1" },
-        { link: "www.google.com", display: "Google 2" },
-        { link: "www.google.com", display: "Google 3" },
+        { link: "www.google.com", display: "www.habits.com" },
+        { link: "www.google.com", display: "www.breakinghabits.org" },
+        { link: "www.google.com", display: "www.implement.com" },
       ],
     };
   },

@@ -69,12 +69,12 @@ export default {
     return {
       case: this.caseObject,
       strategies: this.caseObject.case.strategies,
-      title: "Operationalizing Implementation Strategies",
-      text: "Map the chosen strategies to the actors.",
+      title: "Operationalizing Strategies",
+      text: "Answer the questions below for each of your selected strategies to determine how to operationalize them.",
       links: [
-        { link: "www.google.com", display: "Google 1" },
-        { link: "www.google.com", display: "Google 2" },
-        { link: "www.google.com", display: "Google 3" },
+        { link: "www.google.com", display: "www.habits.com" },
+        { link: "www.google.com", display: "www.breakinghabits.org" },
+        { link: "www.google.com", display: "www.implement.com" },
       ],
     };
   },
