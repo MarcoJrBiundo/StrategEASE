@@ -32,8 +32,7 @@
 
           <span class="barriers">
             <select
-              v-for="(domainItem, domainItemIndex) in barriers[barrierIndex]
-                .domains"
+              v-for="(domainItem, domainItemIndex) in getBarriers()[barrierIndex].domains"
               :key="domainItemIndex"
             >
               <option
@@ -53,7 +52,7 @@
         </div>
         <input
           id="addBarrier"
-          v-on:click="addBarrier"
+          v-on:click="addBarrier()"
           type="button"
           value="+"
         />
@@ -102,7 +101,7 @@ export default {
       var barriers = this.caseObject.case
         .actors[this.actorSelected]
         .behaviour[this.behaviourSelected]
-        .barrier;
+        .barriers;
       if (barriers == null)
         return [{id: 0, description: "", domains: [""]}];
       return barriers;
@@ -114,9 +113,7 @@ export default {
         var behavioursToAdd = [];
 
         for (var behaviourIndex in this.actors[actorIndex].behaviour)
-        {
           behavioursToAdd.push(this.actors[actorIndex].behaviour[behaviourIndex].description);
-        }
 
         behaviours.push({
           actorId: this.actors[actorIndex].id,          
@@ -127,14 +124,20 @@ export default {
       return behaviours;
     },
     addBarrier: function (e) {
-      this.barriers.push({
-        id: this.barriers.length,
-        description: "",
-        domains: [""],
-      });
+     this.caseObject.case
+        .actors[this.actorSelected]
+        .behaviour[this.behaviourSelected]
+        .barriers.push({
+          id: this.barriers.length,
+          description: "",
+          domains: [""],
+        });
     },
     addDomain: function (barrierIndex) {
-      this.barriers[barrierIndex].domains.push("");
+      this.caseObject.case
+        .actors[this.actorSelected]
+        .behaviour[this.behaviourSelected]
+        .barriers[barrierIndex].domains.push("");
     },
     next: function () {},
     validate: function () {},
