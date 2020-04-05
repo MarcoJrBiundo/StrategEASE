@@ -4,14 +4,16 @@
     <div class="content">
       <div class="barrier">
         <select>
-          <optgroup v-for="(behaviours, behaviourListIndex) in getBehaviours()"
-              :key="behaviourListIndex"
-              :v-model=actorSelected
-              :label="behaviours.actorName"
-              >
-            <option v-for="(behaviour, behaviourIndex) in behaviours.behaviourList"
+          <optgroup
+            v-for="(behaviours, behaviourListIndex) in getBehaviours()"
+            :key="behaviourListIndex"
+            :v-model="actorSelected"
+            :label="behaviours.actorName"
+          >
+            <option
+              v-for="(behaviour, behaviourIndex) in behaviours.behaviourList"
               :key="behaviourIndex"
-              :v-model=behaviourSelected
+              :v-model="behaviourSelected"
               :value="behaviourIndex"
               >{{ behaviour }}</option
             >
@@ -85,7 +87,7 @@ export default {
       actorSelected: 0,
       behaviourSelected: 0,
       selectedDomain: [0],
-      barriers: [{id: 0, description: "", domains: [""]}],
+      barriers: [{ id: 0, description: "", domains: [""] }],
       title: "Behaviours to change",
       text:
         "For each change you identified in the previous section, identify the barriers to making that change. You can identify as many barriers as you want.  Next, use the ",
@@ -106,19 +108,18 @@ export default {
         return [{id: 0, description: "", domains: [""]}];
       return barriers;
     },
-    getBehaviours: function (e){
+    getBehaviours: function (e) {
       var behaviours = [];
-      for (var actorIndex in this.actors)
-      {
+      for (var actorIndex in this.actors) {
         var behavioursToAdd = [];
 
         for (var behaviourIndex in this.actors[actorIndex].behaviour)
           behavioursToAdd.push(this.actors[actorIndex].behaviour[behaviourIndex].description);
 
         behaviours.push({
-          actorId: this.actors[actorIndex].id,          
+          actorId: this.actors[actorIndex].id,
           actorName: this.actors[actorIndex].name,
-          behaviourList: behavioursToAdd
+          behaviourList: behavioursToAdd,
         });
       }
       return behaviours;

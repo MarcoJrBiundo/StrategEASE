@@ -31,6 +31,7 @@ export default {
   float: left;
   padding-left: 40px;
   padding-top: 0px;
+  margin-bottom: 2em;
 }
 
 .title {
