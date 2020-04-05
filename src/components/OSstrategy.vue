@@ -78,6 +78,10 @@ export default {
       ],
     };
   },
+  methods: {
+    next: function () {},
+    validate: function () {},
+  },
 };
 </script>
 
