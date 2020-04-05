@@ -50,7 +50,7 @@ export default new Router({
       path: "/sis-domains",
       name: "SISdomains",
       component: SISdomains,
-      props: { caseObject: caseObject },
+      props: { caseObject: caseObject, map: strategyMap },
     },
     {
       path: "/os-strategy",
