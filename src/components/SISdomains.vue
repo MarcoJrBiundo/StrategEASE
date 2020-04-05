@@ -67,6 +67,8 @@ export default {
 
       return foundStrategies;
     },
+    next: function () {},
+    validate: function () {},
   },
   data() {
     return {
