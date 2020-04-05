@@ -1,6 +1,7 @@
 <template>
   <div class="indexclass">
-    <h2>Select or Create a Case</h2>
+    <h2>My Dashboard </h2>
+    <p>Create a new project to get started, or continue working on a saved project</p>
     <div>
       <h4>Existing Cases</h4>
       <p v-if="cases.length==0">No Cases Exist</p>

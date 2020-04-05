@@ -39,9 +39,9 @@ export default {
       text:
         "The “intervention” includes: \n1) what you are implementing -  the practice, procedure, policy or program, and: \n2) how you are implementing -  the strategies you are using to implement that practice, procedure, policy or program. ",
       links: [
-        { link: "www.google.com", display: "Google 1" },
-        { link: "www.google.com", display: "Google 2" },
-        { link: "www.google.com", display: "Google 3" },
+        { link: "www.google.com", display: "www.habits.com" },
+        { link: "www.google.com", display: "www.breakinghabits.org" },
+        { link: "www.google.com", display: "www.implement.com" },
       ],
     };
   },
