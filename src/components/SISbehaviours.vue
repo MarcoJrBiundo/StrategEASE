@@ -4,15 +4,16 @@
     <div class="content">
       <div class="barrier">
         <select>
-          <span v-for="(actor, actorIndex) in actors" :key="actorIndex">
-            <option
-              v-for="(behaviour, behaviourIndex) in actors[actorIndex]
-                .behaviours"
+          <optgroup v-for="(behaviours, behaviourListIndex) in getBehaviours()"
+              :key="behaviourListIndex"
+              :label="behaviours.actorName"
+              >
+            <option v-for="(behaviour, behaviourIndex) in behaviours.behaviourList"
               :key="behaviourIndex"
               :value="behaviourIndex"
               >{{ behaviour }}</option
             >
-          </span>
+          </optgroup>
         </select>
 
         <div
@@ -81,13 +82,6 @@ export default {
       domains: this.map.TDFDomains,
       actors: this.caseObject.case.actors,
       selectedDomain: [0],
-      barriers: [
-        {
-          id: 0,
-          description: "",
-          domains: [""],
-        },
-      ],
       title: "Behaviours to change",
       text:
         "Map each behaviour to domain(s) and list the involved barriers for each behaviour.",
@@ -99,6 +93,25 @@ export default {
     };
   },
   methods: {
+    getBehaviours: function (e){
+      var behaviours = [];
+      for (var actorIndex in this.actors)
+      {
+        var behavioursToAdd = [];
+
+        for (var behaviourIndex in this.actors[actorIndex].behaviour)
+        {
+          behavioursToAdd.push(this.actors[actorIndex].behaviour[behaviourIndex].description);
+        }
+
+        behaviours.push({
+          actorId: this.actors[actorIndex].id,          
+          actorName: this.actors[actorIndex].name,
+          behaviourList: behavioursToAdd
+        });
+      }
+      return behaviours;
+    },
     addBarrier: function (e) {
       this.barriers.push({
         id: this.barriers.length,
