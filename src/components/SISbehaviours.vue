@@ -24,7 +24,7 @@
           id="barrierList"
         >
           <input
-            placeholder="Reason for behaviour"
+            placeholder="Barrier"
             type="text"
             name="barrier"
             group="barriers"
@@ -89,7 +89,7 @@ export default {
       barriers: [{id: 0, description: "", domains: [""]}],
       title: "Behaviours to change",
       text:
-        "Map each behaviour to domain(s) and list the involved barriers for each behaviour.",
+        "For each change you identified in the previous section, identify the barriers to making that change. You can identify as many barriers as you want.  Next, use the ",
       links: [
         { link: "www.google.com", display: "Google 1" },
         { link: "www.google.com", display: "Google 2" },

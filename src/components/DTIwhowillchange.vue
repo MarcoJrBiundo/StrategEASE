@@ -55,15 +55,9 @@ export default {
   },
   data() {
     return {
-      title: "Who Will Change",
+      title: "Defining the Intervention Pt.2",
       text:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod \
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim \
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea \
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate \
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint \
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt \
-        mollit anim id est laborum.",
+        "Identify who is involved (e.g., clinicians, teachers, the public) and what they need to do differently in your intervention (e.g., what they need to change to align with the practice, procedure, policy or program you are trying to implement). You can identify multiple groups and multiple changes for each group if necessary.",
       links: [
         { link: "www.google.com", display: "Google 1" },
         { link: "www.google.com", display: "Google 2" },
