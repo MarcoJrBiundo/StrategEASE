@@ -27,15 +27,16 @@
         >
           <input
             placeholder="Barrier"
+            :v-model="getBarriers()[barrierIndex].description"
             type="text"
             name="barrier"
             group="barriers"
           />
-
           <span class="barriers">
             <select
               v-for="(domainItem, domainItemIndex) in getBarriers()[barrierIndex].domains"
               :key="domainItemIndex"
+              :v-model="getBarriers()[barrierIndex].domains[domainItemIndex]"
             >
               <option
                 v-for="(domain, domainIndex) in domains"
@@ -86,8 +87,6 @@ export default {
       actors: this.caseObject.case.actors,
       actorSelected: 0,
       behaviourSelected: 0,
-      selectedDomain: [0],
-      barriers: [{ id: 0, description: "", domains: [""] }],
       title: "Behaviours to change",
       text:
         "For each change you identified in the previous section, identify the barriers to making that change. You can identify as many barriers as you want.  Next, use the ",
@@ -100,12 +99,12 @@ export default {
   },
   methods: {
     getBarriers: function (e){
-      var barriers = this.caseObject.case
-        .actors[this.actorSelected]
+      var barriers = this.actors[this.actorSelected]
         .behaviour[this.behaviourSelected]
         .barriers;
+      
       if (barriers == null)
-        return [{id: 0, description: "", domains: [""]}];
+        return [{id: 0, description: "", domains: [0]}];
       return barriers;
     },
     getBehaviours: function (e) {
@@ -125,20 +124,18 @@ export default {
       return behaviours;
     },
     addBarrier: function (e) {
-     this.caseObject.case
-        .actors[this.actorSelected]
+      this.actors[this.actorSelected]
         .behaviour[this.behaviourSelected]
         .barriers.push({
-          id: this.barriers.length,
+          id: this.actors[this.actorSelected].behaviour[this.behaviourSelected].barriers.length,
           description: "",
-          domains: [""],
+          domains: [0],
         });
     },
     addDomain: function (barrierIndex) {
-      this.caseObject.case
-        .actors[this.actorSelected]
+      this.actors[this.actorSelected]
         .behaviour[this.behaviourSelected]
-        .barriers[barrierIndex].domains.push("");
+        .barriers[barrierIndex].domains.push(0);
     },
     next: function () {},
     validate: function () {},
