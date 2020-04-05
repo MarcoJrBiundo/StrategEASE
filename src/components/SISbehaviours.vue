@@ -20,11 +20,10 @@
         </select>
 
         <div
-          v-for="(barrier, barrierIndex) in this.caseObject.case.actors[
-            this.actorSelected
-          ].behaviour[this.behaviourSelected].barriers"
+          v-for="(barrier, barrierIndex) in caseObject.case.actors[
+            actorSelected
+          ].behaviour[behaviourSelected].barriers"
           :key="barrierIndex"
-          id="barrierList"
         >
           <input
             placeholder="Barrier"
@@ -144,17 +143,18 @@ export default {
       return behaviours;
     },
     addBarrier: function (e) {
-      this.actors[this.actorSelected].behaviour[
+      this.caseObject.case.actors[this.actorSelected].behaviour[
         this.behaviourSelected
       ].barriers.push({
-        id: this.actors[this.actorSelected].behaviour[this.behaviourSelected]
-          .barriers.length,
+        id: this.caseObject.case.actors[this.actorSelected].behaviour[
+          this.behaviourSelected
+        ].barriers.length,
         description: "",
         domains: [0],
       });
     },
     addDomain: function (barrierIndex) {
-      this.actors[this.actorSelected].behaviour[
+      this.caseObject.case.actors[this.actorSelected].behaviour[
         this.behaviourSelected
       ].barriers[barrierIndex].domains.push(0);
     },
