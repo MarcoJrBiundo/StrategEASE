@@ -20,24 +20,24 @@
         </select>
 
         <div
-          v-for="(barrier, barrierIndex) in getBarriers()"
+          v-for="(barrier, barrierIndex) in this.caseObject.case.actors[
+            this.actorSelected
+          ].behaviour[this.behaviourSelected].barriers"
           :key="barrierIndex"
           id="barrierList"
         >
           <input
             placeholder="Barrier"
-            :v-model="getBarriers()[barrierIndex].description"
+            :v-model="barrier.description"
             type="text"
             name="barrier"
             group="barriers"
           />
           <span class="barriers">
             <select
-              v-for="(domainItem, domainItemIndex) in getBarriers()[
-                barrierIndex
-              ].domains"
+              v-for="(domainItem, domainItemIndex) in barrier.domains"
               :key="domainItemIndex"
-              :v-model="getBarriers()[barrierIndex].domains[domainItemIndex]"
+              :v-model="barrier.domainItem"
             >
               <option
                 v-for="(domain, domainIndex) in domains"
@@ -98,20 +98,33 @@ export default {
       ],
     };
   },
+  mounted: function () {
+    this.caseObject.case.actors.forEach((actor) => {
+      console.log(actor);
+      actor.behaviour.forEach((behaviour) => {
+        console.log(behaviour);
+        if (!behaviour.barriers) {
+          behaviour.barriers = [{ id: 0, description: "", domains: [0] }];
+        }
+        // if (behaviour.barriers.length < 1) {
+        //   behaviour.barriers.push([{ id: 0, description: "", domains: [0] }]);
+        // }
+      });
+    });
+  },
   methods: {
     updateActor: function (e) {
       this.actorSelected = e.target.selectedOptions[0].getAttribute("actor");
-      console.log(e.target.selectedOptions[0].value);
       this.behaviourSelected = e.target.selectedOptions[0].value;
     },
-    getBarriers: function (e) {
-      var barriers = this.actors[this.actorSelected].behaviour[
-        this.behaviourSelected
-      ].barriers;
+    // getBarriers: function (e) {
+    //   var barriers = this.actors[this.actorSelected].behaviour[
+    //     this.behaviourSelected
+    //   ].barriers;
 
-      if (barriers == null) return [{ id: 0, description: "", domains: [0] }];
-      return barriers;
-    },
+    //   if (barriers == null) return [{ id: 0, description: "", domains: [0] }];
+    //   return barriers;
+    // },
     getBehaviours: function (e) {
       var behaviours = [];
       for (var actorIndex in this.actors) {
