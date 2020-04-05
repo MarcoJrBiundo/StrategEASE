@@ -3,17 +3,16 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="content">
       <div class="barrier">
-        <select>
+        <select :v-model="behaviourSelected" @change="updateActor">
           <optgroup
             v-for="(behaviours, behaviourListIndex) in getBehaviours()"
             :key="behaviourListIndex"
-            :v-model="actorSelected"
             :label="behaviours.actorName"
           >
             <option
               v-for="(behaviour, behaviourIndex) in behaviours.behaviourList"
               :key="behaviourIndex"
-              :v-model="behaviourSelected"
+              :actor="behaviours.actorId"
               :value="behaviourIndex"
               >{{ behaviour }}</option
             >
@@ -98,6 +97,9 @@ export default {
     };
   },
   methods: {
+    updateActor: function (e){
+      this.actorSelected = e.target.selectedOptions[0].getAttribute('actor');
+    },
     getBarriers: function (e){
       var barriers = this.actors[this.actorSelected]
         .behaviour[this.behaviourSelected]
