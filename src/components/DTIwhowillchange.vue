@@ -1,21 +1,36 @@
 <template>
   <div class="indexclass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
-    <div v-for="(actor, actorIndex) in actors" :key="actorIndex">
-      <input
-        :placeholder="placeholderMain"
-        v-model="actor.name"
+    <div class="content">
+      <div
+        v-for="(actor, actorIndex) in actors"
+        :key="actorIndex"
         class="actor"
-      />
-      <div v-for="(behav, behavIndex) in actor.behaviour" :key="behavIndex">
+      >
         <input
-          :placeholder="placeholderSecondary"
-          v-model="behav.description"
+          :placeholder="placeholderMain"
+          v-model="actor.name"
+          class="actor"
+        />
+        <div
+          v-for="(behav, behavIndex) in actor.behaviour"
+          :key="behavIndex"
           class="behaviour"
+        >
+          <input
+            :placeholder="placeholderSecondary"
+            v-model="behav.description"
+            class="behaviour"
+          />
+        </div>
+
+        <input
+          v-on:click="addBehaviour(actorIndex)"
+          type="button"
+          value="Add Behaviour"
         />
       </div>
-      <button v-on:click="addActor()">Add Actor</button>
-      <button v-on:click="addBehaviour(actorIndex)">Add Behaviour</button>
+      <input v-on:click="addActor()" type="button" value="Add Actor" />
     </div>
     <BottomBar :caseObject="caseObject"></BottomBar>
   </div>
@@ -31,7 +46,6 @@ export default {
   name: "DTIwhowillchange",
   components: {
     CommonMainPage,
-    // AssociatedInputs,
     BottomBar,
   },
   props: {
@@ -145,60 +159,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.inputs {
+.actor {
   clear: both;
 }
-.indexclass {
-  position: absolute;
-  top: 18%;
-  left: 17%;
-  width: 82%;
-  height: 80%;
-  background: #ffffff 0% 0%;
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 30px;
-  opacity: 1;
-}
-
-.indexclass h2 {
-  padding-left: 40px;
-  text-align: left;
-  letter-spacing: 0;
-  color: #206aa2;
-  opacity: 1;
-}
-
-.links {
-  width: 40%;
-  margin-right: 5%;
-  padding-left: 5%;
-  padding-bottom: 5%;
-  float: right;
-  background: #47cacc2b 0% 0% no-repeat padding-box;
-  box-shadow: 7px 7px 34px #28282836;
-  border: 2px solid #67cbcd;
-  border-radius: 21px;
-  opacity: 1;
-  margin-top: -100px;
-}
-
-.caseNameField {
-  width: 95%;
-  margin-left: 3%;
-  position: absolute;
-  margin-top: 15%;
-  height: 10%;
-  top: 215;
-}
-
-/* .actor {
-  width: 48% !important;
-  float: left;
-  clear: left;
+.actor > input {
+  width: 48%;
 }
 
 .behaviour {
-  width: 48% !important;
   float: right;
-} */
+  clear: right;
+  width: 48%;
+}
+
+.behaviour > input {
+  width: ;
+}
+
+.actor input[type="button"] {
+  /* margin-right: 48.5%; */
+  width: auto;
+  display: block;
+  float: right;
+  clear: right;
+}
 </style>

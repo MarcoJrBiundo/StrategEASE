@@ -3,15 +3,18 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div>
       <select id="tdfDomains" v-model="selectedDomain">
-        <option v-for="(domain,index) in domains" :value="index" :key="index">{{
-          domain[0]
-        }}</option>
+        <option
+          v-for="(domain, index) in domains"
+          :value="index"
+          :key="index"
+          >{{ domain[0] }}</option
+        >
       </select>
       <ul>
         <li v-for="strategy in getStrategies()" :key="strategy">
-          <div v-on:click="updateStrategy" >
+          <div v-on:click="updateStrategy">
             <input type="checkbox" :id="strategy" />
-            <label :for="strategy">{{strategy}}</label>
+            <label :for="strategy">{{ strategy }}</label>
           </div>
         </li>
       </ul>
@@ -27,37 +30,40 @@ import CommonMainPage from "./CommonMainPage";
 export default {
   name: "SISdomains",
   components: {
-    CommonMainPage
+    CommonMainPage,
   },
   props: {
     map: Object,
     case: Object,
   },
   methods: {
-    updateStrategy: function(e){
-      
-      if (e.target.children.length)
-      {  
-        e.target.children[0].checked = e.target.children[0].checked ? false: true;
-      }
-      else 
-      {
-        e.target.parentElement.children[0].checked = e.target.parentElement.children[0].checked ? false: true;
+    updateStrategy: function (e) {
+      if (e.target.children.length) {
+        e.target.children[0].checked = e.target.children[0].checked
+          ? false
+          : true;
+      } else {
+        e.target.parentElement.children[0].checked = e.target.parentElement
+          .children[0].checked
+          ? false
+          : true;
       }
     },
-    getStrategies: function()
-    {
+    getStrategies: function () {
       var foundStrategies = [];
-      
-      this.domains[this.selectedDomain][1].split(',').forEach(funcIndex => {
-        this.intervention[funcIndex][1].split(',').forEach(strategyIndex => {
-          if (foundStrategies.indexOf(this.strategies[parseInt(strategyIndex)]) < 0) 
+
+      this.domains[this.selectedDomain][1].split(",").forEach((funcIndex) => {
+        this.intervention[funcIndex][1].split(",").forEach((strategyIndex) => {
+          if (
+            foundStrategies.indexOf(this.strategies[parseInt(strategyIndex)]) <
+            0
+          )
             foundStrategies.push(this.strategies[parseInt(strategyIndex)]);
-        }); 
+        });
       });
 
       return foundStrategies;
-    }
+    },
   },
   data() {
     return {
@@ -77,10 +83,10 @@ export default {
       links: [
         { link: "www.google.com", display: "Google 1" },
         { link: "www.google.com", display: "Google 2" },
-        { link: "www.google.com", display: "Google 3" }
-      ]
+        { link: "www.google.com", display: "Google 3" },
+      ],
     };
-  }
+  },
 };
 </script>
 
@@ -90,7 +96,7 @@ export default {
   display: block;
 }
 
-.domainsClass input[type="checkbox"]{
+.domainsClass input[type="checkbox"] {
   display: inline;
   position: relative;
   opacity: 100;

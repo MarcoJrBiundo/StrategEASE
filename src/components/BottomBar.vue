@@ -1,10 +1,10 @@
 <template>
   <div class="bottomBar">
-    <button v-on:click="back()" class="botBut left">BACK</button>
-    <button v-on:click="saveAndQuit()" class="botBut center">
+    <button v-on:click="back()" class="botBut leftBut">BACK</button>
+    <button v-on:click="saveAndQuit()" class="botBut centerBut">
       SAVE AND QUIT
     </button>
-    <button v-on:click="next()" class="botBut right">NEXT</button>
+    <button v-on:click="next()" class="botBut rightBut">NEXT</button>
   </div>
 </template>
 
@@ -15,13 +15,13 @@ export default {
   name: "BottomBar",
   props: {
     case: Object,
-    nextRoute: String // for passing in the next route to go to
+    nextRoute: String, // for passing in the next route to go to
   },
   data() {
     return {};
   },
   methods: {
-    saveAndQuit: function(e) {
+    saveAndQuit: function (e) {
       /**
        * calls validation for parent and then saves to database and
        * then routes to home page
@@ -29,17 +29,17 @@ export default {
       this.$parent.validate();
       this.$router.push({ path: "/" });
     },
-    back: function(e) {
+    back: function (e) {
       /** takes user back one page */
       this.$router.go(-1);
     },
-    next: function(e) {
+    next: function (e) {
       /** calls parent next function to validate
        *  and move to the next page
        */
       this.$parent.next();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -47,10 +47,11 @@ export default {
 .bottomBar {
   position: absolute;
   bottom: 2.5%;
-  width: 100%;
-  /* display: flex;
-  align-items: center;
-  justify-content: ; */
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 5%;
+  margin-left: 5%;
 }
 
 .botBut {
@@ -62,27 +63,19 @@ export default {
   box-shadow: 5px 5px 20px #329d9c55;
   border-radius: 21px;
   opacity: 1;
+  border: solid 0px;
   text-align: center;
   letter-spacing: 0;
   color: #ffffff;
   opacity: 1;
 }
 
-.left {
-  /* text-align: left; */
-  display: inline-block;
-  margin-left: 5%;
+.leftBut {
 }
 
-.right {
-  /* text-align: right; */
-  display: inline-block;
-  margin-right: 5%;
+.rightBut {
 }
 
-.center {
-  /* text-align: center; */
-  /* left: 50%; */
-  /* margin-left: 50%; */
+.centerBut {
 }
 </style>

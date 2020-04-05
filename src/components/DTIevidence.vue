@@ -24,10 +24,10 @@ import CommonMainPage from "./CommonMainPage";
 export default {
   name: "DTIdevidence",
   components: {
-    CommonMainPage
+    CommonMainPage,
   },
   props: {
-    case: Object
+    case: Object,
   },
   data() {
     return {
@@ -43,10 +43,10 @@ export default {
       links: [
         { link: "www.google.com", display: "Google 1" },
         { link: "www.google.com", display: "Google 2" },
-        { link: "www.google.com", display: "Google 3" }
-      ]
+        { link: "www.google.com", display: "Google 3" },
+      ],
     };
-  }
+  },
 };
 </script>
 
@@ -56,48 +56,9 @@ export default {
   border-right: 1px solid black;
   margin-right: 2px;
 }
-.inputs {
-  width: 40%;
-  position: absolute;
-  margin-top: 15%;
-  height: 10%;
-  top: 215;
-}
+
 .half {
   width: 40%;
-}
-.indexclass {
-  position: absolute;
-  top: 18%;
-  left: 17%;
-  width: 82%;
-  height: 80%;
-  background: #ffffff 0% 0%;
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 30px;
-  opacity: 1;
-}
-
-.indexclass h2 {
-  padding-left: 40px;
-  text-align: left;
-  letter-spacing: 0;
-  color: #206aa2;
-  opacity: 1;
-}
-
-.links {
-  width: 40%;
-  margin-right: 5%;
-  padding-left: 5%;
-  padding-bottom: 5%;
-  float: right;
-  background: #47cacc2b 0% 0% no-repeat padding-box;
-  box-shadow: 7px 7px 34px #28282836;
-  border: 2px solid #67cbcd;
-  border-radius: 21px;
-  opacity: 1;
-  margin-top: -100px;
 }
 
 .caseNameField {

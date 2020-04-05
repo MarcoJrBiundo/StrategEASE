@@ -1,67 +1,76 @@
 <template>
-  <div class="behavioursClass">
+  <div class="indexclass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
-    <div class="barrier">
-      <select>
-        <span v-for="(actor, actorIndex) in actors" :key="actorIndex">
-          <option
-            v-for="(behaviour, behaviourIndex) in actors[actorIndex].behaviours"
-            :key="behaviourIndex"
-            :value="behaviourIndex"
-            >{{ behaviour }}</option
-          >
-        </span>
-      </select>
-
-      <div
-        v-for="(barrier, barrierIndex) in barriers"
-        :key="barrierIndex"
-        id="barrierList"
-      >
-        <input
-          placeholder="Reason for behaviour"
-          type="text"
-          name="barrier"
-          group="barriers"
-        />
-
-        <span class="barriers">
-          <select
-            v-for="(domainItem, domainItemIndex) in barriers[barrierIndex]
-              .domains"
-            :key="domainItemIndex"
-          >
+    <div class="content">
+      <div class="barrier">
+        <select>
+          <span v-for="(actor, actorIndex) in actors" :key="actorIndex">
             <option
-              v-for="(domain, domainIndex) in domains"
-              :value="domainIndex"
-              :key="domainIndex"
-              >{{ domain[0] }}</option
+              v-for="(behaviour, behaviourIndex) in actors[actorIndex]
+                .behaviours"
+              :key="behaviourIndex"
+              :value="behaviourIndex"
+              >{{ behaviour }}</option
             >
-          </select>
+          </span>
+        </select>
 
+        <div
+          v-for="(barrier, barrierIndex) in barriers"
+          :key="barrierIndex"
+          id="barrierList"
+        >
           <input
-            v-on:click="addDomain(barrierIndex)"
-            type="button"
-            value="Add Domain"
+            placeholder="Reason for behaviour"
+            type="text"
+            name="barrier"
+            group="barriers"
           />
-        </span>
+
+          <span class="barriers">
+            <select
+              v-for="(domainItem, domainItemIndex) in barriers[barrierIndex]
+                .domains"
+              :key="domainItemIndex"
+            >
+              <option
+                v-for="(domain, domainIndex) in domains"
+                :value="domainIndex"
+                :key="domainIndex"
+                >{{ domain[0] }}</option
+              >
+            </select>
+
+            <input
+              v-on:click="addDomain(barrierIndex)"
+              type="button"
+              value="Add Domain"
+            />
+          </span>
+        </div>
+        <input
+          id="addBarrier"
+          v-on:click="addBarrier"
+          type="button"
+          value="+"
+        />
       </div>
-      <input id="addBarrier" v-on:click="addBarrier" type="button" value="+" />
     </div>
+    <BottomBar :caseObject="caseObject"></BottomBar>
   </div>
 </template>
 
 <script>
 import db from "@/firebase/init";
 import Vue from "vue";
-// import barrier from "./barrier";
 import CommonMainPage from "./CommonMainPage";
+import BottomBar from "./BottomBar";
 
 export default {
   name: "SISbehaviours",
   components: {
-    // barrier,
     CommonMainPage,
+    BottomBar,
   },
   props: {
     map: Object,
@@ -100,6 +109,8 @@ export default {
     addDomain: function (barrierIndex) {
       this.barriers[barrierIndex].domains.push("");
     },
+    next: function () {},
+    validate: function () {},
   },
 };
 </script>
@@ -107,8 +118,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .barriers,
-.barrier input[type="text"],
-.barrier select {
+.barrier input[type="text"] {
   width: 48%;
 }
 .barrier select {
@@ -117,53 +127,20 @@ export default {
 .barriers input[type="button"] {
   margin-left: 48.5%;
   display: block;
+  margin-bottom: 2%;
 }
+
+.barriers {
+  float: right;
+  clear: right;
+}
+
 .barrier {
   clear: both;
 }
 
 #behaviourSelector {
   display: block;
-}
-
-.behavioursClass {
-  position: absolute;
-  top: 18%;
-  left: 17%;
-  width: 82%;
-  height: 80%;
-  background: #ffffff 0% 0%;
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 30px;
-  opacity: 1;
-}
-
-.behavioursClass h2 {
-  padding-left: 40px;
-  text-align: left;
-  letter-spacing: 0;
-  color: #206aa2;
-  opacity: 1;
-}
-.para {
-  width: 50%;
-  float: left;
-  padding-left: 40px;
-  padding-top: 0px;
-}
-
-.links {
-  width: 40%;
-  margin-right: 5%;
-  padding-left: 5%;
-  padding-bottom: 5%;
-  float: right;
-  background: #47cacc2b 0% 0% no-repeat padding-box;
-  box-shadow: 7px 7px 34px #28282836;
-  border: 2px solid #67cbcd;
-  border-radius: 21px;
-  opacity: 1;
-  margin-top: -100px;
 }
 
 .caseNameField {
@@ -178,7 +155,7 @@ export default {
 #barrierList {
   clear: both;
   display: block;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   max-height: 450px;
 }
 </style>
