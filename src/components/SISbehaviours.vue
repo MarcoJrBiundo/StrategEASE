@@ -33,7 +33,9 @@
           />
           <span class="barriers">
             <select
-              v-for="(domainItem, domainItemIndex) in getBarriers()[barrierIndex].domains"
+              v-for="(domainItem, domainItemIndex) in getBarriers()[
+                barrierIndex
+              ].domains"
               :key="domainItemIndex"
               :v-model="getBarriers()[barrierIndex].domains[domainItemIndex]"
             >
@@ -97,16 +99,17 @@ export default {
     };
   },
   methods: {
-    updateActor: function (e){
-      this.actorSelected = e.target.selectedOptions[0].getAttribute('actor');
+    updateActor: function (e) {
+      this.actorSelected = e.target.selectedOptions[0].getAttribute("actor");
+      console.log(e.target.selectedOptions[0].value);
+      this.behaviourSelected = e.target.selectedOptions[0].value;
     },
-    getBarriers: function (e){
-      var barriers = this.actors[this.actorSelected]
-        .behaviour[this.behaviourSelected]
-        .barriers;
-      
-      if (barriers == null)
-        return [{id: 0, description: "", domains: [0]}];
+    getBarriers: function (e) {
+      var barriers = this.actors[this.actorSelected].behaviour[
+        this.behaviourSelected
+      ].barriers;
+
+      if (barriers == null) return [{ id: 0, description: "", domains: [0] }];
       return barriers;
     },
     getBehaviours: function (e) {
@@ -115,7 +118,9 @@ export default {
         var behavioursToAdd = [];
 
         for (var behaviourIndex in this.actors[actorIndex].behaviour)
-          behavioursToAdd.push(this.actors[actorIndex].behaviour[behaviourIndex].description);
+          behavioursToAdd.push(
+            this.actors[actorIndex].behaviour[behaviourIndex].description
+          );
 
         behaviours.push({
           actorId: this.actors[actorIndex].id,
@@ -126,18 +131,19 @@ export default {
       return behaviours;
     },
     addBarrier: function (e) {
-      this.actors[this.actorSelected]
-        .behaviour[this.behaviourSelected]
-        .barriers.push({
-          id: this.actors[this.actorSelected].behaviour[this.behaviourSelected].barriers.length,
-          description: "",
-          domains: [0],
-        });
+      this.actors[this.actorSelected].behaviour[
+        this.behaviourSelected
+      ].barriers.push({
+        id: this.actors[this.actorSelected].behaviour[this.behaviourSelected]
+          .barriers.length,
+        description: "",
+        domains: [0],
+      });
     },
     addDomain: function (barrierIndex) {
-      this.actors[this.actorSelected]
-        .behaviour[this.behaviourSelected]
-        .barriers[barrierIndex].domains.push(0);
+      this.actors[this.actorSelected].behaviour[
+        this.behaviourSelected
+      ].barriers[barrierIndex].domains.push(0);
     },
     next: function () {},
     validate: function () {},
