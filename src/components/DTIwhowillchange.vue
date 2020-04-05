@@ -172,8 +172,8 @@ export default {
   width: 48%;
 }
 
-.behaviour > input {
-  width: ;
+.actor > input[type="button"] {
+  margin-right: 36.5%;
 }
 
 .actor input[type="button"] {
