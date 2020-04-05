@@ -1,7 +1,7 @@
 <template>
   <div class="domainsClass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
-    <div>
+    <div class="content">
       <select id="tdfDomains" v-model="selectedDomain">
         <option
           v-for="(domain, index) in domains"
@@ -20,17 +20,20 @@
       </ul>
       <!--buttons to go in here-->
     </div>
+    <BottomBar :caseObject="caseObject"></BottomBar>
   </div>
 </template>
 
 <script>
 import db from "@/firebase/init";
 import CommonMainPage from "./CommonMainPage";
+import BottomBar from "./BottomBar";
 
 export default {
   name: "SISdomains",
   components: {
     CommonMainPage,
+    BottomBar,
   },
   props: {
     map: Object,
