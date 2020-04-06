@@ -83,7 +83,9 @@ export default {
       actors: this.caseObject.case.actors,
       actorSelected: 0,
       behaviourSelected: 0,
-      title: "Behaviours to change",
+      selectedDomain: [0],
+      barriers: [{id: 0, description: "", domains: [""]}],
+      title: "Barriers to Change",
       text:
         "For each change you identified in the previous section, identify the barriers to making that change. You can identify as many barriers as you want.  Next, use the dropdown list to categorize each barrier to one of 14 different barrier types. You can identify up to two different categories that the barrier aligns with. Definitions of the barrier types and examples of how to do this step are available in the Helpful Links.This step assumes that you have already performed a barriers assessment. If not, consult the Helpful Links to guide you through the process of doing a barriers assessment",
       links: [
