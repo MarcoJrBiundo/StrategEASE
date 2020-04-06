@@ -2,15 +2,15 @@
   <div class="domainsClass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="content">
-      <select id="tdfDomains" v-model="selectedDomain">
+      <select id="tdfDomains" v-model="selectedDomain" v-on:change=loadUi>
         <option v-for="(domain, index) in domains" :value="index" :key="index">{{ domain[0] }}</option>
       </select>
-     
-      <div v-for="(strategy,index) in getStrategies()" v-on:click="updateStrategy" :key="index">
-        <input type="checkbox" :id="'strategy' + selectedDomain + ':' + index" :key="selectedDomain + ':' + index" />
-        <label :for="'strategy' + selectedDomain + ':' + index">{{ strategy }}</label>
-      </div>
-    
+      <span id="checkBoxes">
+        <div v-for="(strategy,index) in getStrategies()" v-on:click="updateStrategy" :key="index">
+          <input type="checkbox" :id="'cb'+strategy.index" :key="selectedDomain + ':' + index" />
+          <label :for="'cb'+strategy.index">{{ strategy.text }}</label>
+        </div>
+      </span>
       <!--buttons to go in here-->
     </div>
     <BottomBar :caseObject="caseObject"></BottomBar>
@@ -49,24 +49,50 @@ export default {
       ],
     };
   },
-  mounted: function () {
-    //load the strategies here based off the id's
-    
+  mounted: function() {
+    this.loadUi();
   },
   methods: {
+    loadUi: function(e){
+      this.$nextTick(function () {
+        //load the strategies here based off the id's stored
+        if (this.storedStrategies.length)
+        {
+          for (var i = 0; i < this.storedStrategies.length; i++)
+          {
+            var strategy = this.storedStrategies[i];
+
+            var checkboxGroup = document.getElementById("checkBoxes"); 
+            //for each checkbox group
+            Array(checkboxGroup.children).forEach(checkboxItem => {
+              //for each checkbox
+              for (var j = 0; j < checkboxItem.length; j++){
+                //set the proper checkboxes id based off the stored strategy id
+                if (checkboxItem[j].children[0].getAttribute("id") == strategy.id){
+                  checkboxItem[j].children[0].setAttribute("checked", "checked");
+                } 
+              }
+            });
+            //console.log(checkboxGroup);
+            //return checkbox.innerText == strategy.name;
+            // 
+          }
+        }
+      });
+    },
     updateStrategy: function (e) {
       //this event triggers when the label is clicked we only 
       //  want to perform an action when it is the checkbox being
       //  activated
       if (e.target.getAttribute("type") == "checkbox")
       {
-        //if the checkbox is checked and the item isn't in the strategies list
+        //if the checkbox is unchecked and the item isn't in the strategies list
         if (!e.target.getAttribute("checked") && 
             !this.storedStrategies.filter(function(strategy){
               return strategy.id === e.target.getAttribute("id");
             }).length)
         {
-          this.storedStrategies.push( {
+          var newStrategy = {
             id: e.target.getAttribute("id"),
             name: e.target.parentNode.children[1].innerText,
             target: "",
@@ -74,15 +100,20 @@ export default {
             del_strat: "",
             edu_barrier: "",
             adaptations: ""
-          });
+          };
+          this.storedStrategies.push(newStrategy);
         }
         //otherwise remove the item from the array
         else 
         {
-          var index = this.storedStrategies.pop(this.storedStrategies.filter(function(strategy){
+          //get the first instance of the item filtered
+          var strategyToRemove = this.storedStrategies.filter(function(strategy){
             return strategy.id === e.target.getAttribute("id");
-          }));
+          })[0];
+          
+          this.storedStrategies.pop(strategyToRemove);
         }
+        //console.log(this.storedStrategies); //display the strategy list every time it is updated
       }
     },
     getStrategies: function () {
@@ -91,7 +122,10 @@ export default {
       this.domains[this.selectedDomain][1].split(",").forEach((funcIndex) => {
         this.intervention[funcIndex][1].split(",").forEach((strategyIndex) => {
           if (foundStrategies.indexOf(this.strategies[parseInt(strategyIndex)]) < 0)
-            foundStrategies.push(this.strategies[parseInt(strategyIndex)]);
+            foundStrategies.push({
+              text: this.strategies[parseInt(strategyIndex)],
+              index: parseInt(strategyIndex)
+            });
         });
       });
 
