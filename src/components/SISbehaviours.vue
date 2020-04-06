@@ -20,17 +20,13 @@
         </select>
 
         <div
-          v-for="(barrier, barrierIndex) in caseObject.case.actors[
-            actorSelected
-          ].behaviour[behaviourSelected].barriers"
+          v-for="(barrier, barrierIndex) in caseObject.case.actors[actorSelected].behaviour[behaviourSelected].barriers"
           :key="barrierIndex"
         >
           <input
             placeholder="Barrier"
             :v-model="barrier.description"
             type="text"
-            name="barrier"
-            group="barriers"
           />
           <span class="barriers">
             <select
@@ -87,13 +83,7 @@ export default {
       actors: this.caseObject.case.actors,
       actorSelected: 0,
       behaviourSelected: 0,
-<<<<<<< HEAD
-      selectedDomain: [0],
-      barriers: [{id: 0, description: "", domains: [""]}],
-      title: "Barriers to Change",
-=======
       title: "Behaviours to change",
->>>>>>> 389cc3da288d93fa64387cee097620db345c48a3
       text:
         "For each change you identified in the previous section, identify the barriers to making that change. You can identify as many barriers as you want.  Next, use the dropdown list to categorize each barrier to one of 14 different barrier types. You can identify up to two different categories that the barrier aligns with. Definitions of the barrier types and examples of how to do this step are available in the Helpful Links.This step assumes that you have already performed a barriers assessment. If not, consult the Helpful Links to guide you through the process of doing a barriers assessment",
       links: [
@@ -104,7 +94,7 @@ export default {
     };
   },
   mounted: function () {
-    this.caseObject.case.actors.forEach((actor) => {
+    this.caseObject.case.actors.forEach(actor => {
       console.log(actor);
       actor.behaviour.forEach((behaviour) => {
         console.log(behaviour);

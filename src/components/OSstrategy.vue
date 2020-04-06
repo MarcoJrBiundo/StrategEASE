@@ -7,11 +7,13 @@
         <select v-model="strategies.name" id="strategySelector">
           <option value="1">Strategy 1</option>
         </select>
+        
         <br />
         <label for="actorSelector">Who is the Strategy targeting?</label>
         <select v-model="strategies.target" id="actorSelector">
           <option value="1">Actor 1</option>
         </select>
+
         <br />
         <label for="deliveryActorText">Who will deliver the Strategy?</label>
         <input
@@ -20,25 +22,24 @@
           id="deliveryActorText"
           placeholder="Upper Management"
         />
+        
         <br />
-        <label for="deliveryMethodText"
-          >How will you deliver the Strategy?</label
-        >
+        <label for="deliveryMethodText">How will you deliver the Strategy?</label>
         <input
           v-model="strategies.del_strat"
           type="text"
           id="deliveryMethodText"
           placeholder="e.g number of times, length of time..."
         />
+        
         <br />
         <label for="barrierSelector">What Barriers are being targeted?</label>
         <select v-model="strategies.edu_barrier" id="barrierSelector">
           <option value="1">Barrier 1</option>
         </select>
+        
         <br />
-        <label for="adaptationsText"
-          >What adaptations might you consider?</label
-        >
+        <label for="adaptationsText">What adaptations might you consider?</label>
         <input
           v-model="strategies.adaptations"
           type="text"

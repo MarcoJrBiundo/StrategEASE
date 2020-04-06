@@ -3,21 +3,14 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="content">
       <select id="tdfDomains" v-model="selectedDomain">
-        <option
-          v-for="(domain, index) in domains"
-          :value="index"
-          :key="index"
-          >{{ domain[0] }}</option
-        >
+        <option v-for="(domain, index) in domains" :value="index" :key="index">{{ domain[0] }}</option>
       </select>
-      <ul>
-        <li v-for="strategy in getStrategies()" :key="strategy">
-          <div v-on:click="updateStrategy">
-            <input type="checkbox" :id="strategy" />
-            <label :for="strategy">{{ strategy }}</label>
-          </div>
-        </li>
-      </ul>
+     
+      <div v-for="(strategy,index) in getStrategies()" v-on:click="updateStrategy" :key="index">
+        <input type="checkbox" :id="'strategy' + selectedDomain + ':' + index" :key="selectedDomain + ':' + index" />
+        <label :for="'strategy' + selectedDomain + ':' + index">{{ strategy }}</label>
+      </div>
+    
       <!--buttons to go in here-->
     </div>
     <BottomBar :caseObject="caseObject"></BottomBar>
@@ -37,19 +30,59 @@ export default {
   },
   props: {
     map: Object,
-    case: Object,
+    caseObject: Object,
+  },
+  data() {
+    return {
+      domains: this.map.TDFDomains,
+      intervention: this.map.InterventionFunctions,
+      strategies: this.map.Strategies,
+      storedStrategies: this.caseObject.case.strategies,
+      selectedDomain: 0,
+      title: "Selecting Strategies",
+      text:
+        "For each domain in the drop down please select one or more strategies",
+      links: [
+        { link: "www.google.com", display: "www.habits.com" },
+        { link: "www.google.com", display: "www.breakinghabits.org" },
+        { link: "www.google.com", display: "www.implement.com" },
+      ],
+    };
+  },
+  mounted: function () {
+    //load the strategies here based off the id's
+    
   },
   methods: {
     updateStrategy: function (e) {
-      if (e.target.children.length) {
-        e.target.children[0].checked = e.target.children[0].checked
-          ? false
-          : true;
-      } else {
-        e.target.parentElement.children[0].checked = e.target.parentElement
-          .children[0].checked
-          ? false
-          : true;
+      //this event triggers when the label is clicked we only 
+      //  want to perform an action when it is the checkbox being
+      //  activated
+      if (e.target.getAttribute("type") == "checkbox")
+      {
+        //if the checkbox is checked and the item isn't in the strategies list
+        if (!e.target.getAttribute("checked") && 
+            !this.storedStrategies.filter(function(strategy){
+              return strategy.id === e.target.getAttribute("id");
+            }).length)
+        {
+          this.storedStrategies.push( {
+            id: e.target.getAttribute("id"),
+            name: e.target.parentNode.children[1].innerText,
+            target: "",
+            delivery: "",
+            del_strat: "",
+            edu_barrier: "",
+            adaptations: ""
+          });
+        }
+        //otherwise remove the item from the array
+        else 
+        {
+          var index = this.storedStrategies.pop(this.storedStrategies.filter(function(strategy){
+            return strategy.id === e.target.getAttribute("id");
+          }));
+        }
       }
     },
     getStrategies: function () {
@@ -57,10 +90,7 @@ export default {
 
       this.domains[this.selectedDomain][1].split(",").forEach((funcIndex) => {
         this.intervention[funcIndex][1].split(",").forEach((strategyIndex) => {
-          if (
-            foundStrategies.indexOf(this.strategies[parseInt(strategyIndex)]) <
-            0
-          )
+          if (foundStrategies.indexOf(this.strategies[parseInt(strategyIndex)]) < 0)
             foundStrategies.push(this.strategies[parseInt(strategyIndex)]);
         });
       });
@@ -69,23 +99,7 @@ export default {
     },
     next: function () {},
     validate: function () {},
-  },
-  data() {
-    return {
-      domains: this.map.TDFDomains,
-      intervention: this.map.InterventionFunctions,
-      strategies: this.map.Strategies,
-      selectedDomain: 0,
-      title: "Selecting Strategies",
-      text:
-        "For each domian in the drop down please select one or more strategies",
-      links: [
-        { link: "www.google.com", display: "www.habits.com" },
-        { link: "www.google.com", display: "www.breakinghabits.org" },
-        { link: "www.google.com", display: "www.implement.com" },
-      ],
-    };
-  },
+  }
 };
 </script>
 
