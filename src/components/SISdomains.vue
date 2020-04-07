@@ -62,9 +62,8 @@ export default {
           {
             var strategy = this.storedStrategies[i];
 
-            var checkboxGroup = document.getElementById("checkBoxes"); 
             //for each checkbox group
-            Array(checkboxGroup.children).forEach(checkboxItem => {
+            Array(document.getElementById("checkBoxes").children).forEach(checkboxItem => {
               //for each checkbox
               for (var j = 0; j < checkboxItem.length; j++){
                 //set the proper checkboxes id based off the stored strategy id
@@ -95,7 +94,7 @@ export default {
           var newStrategy = {
             id: e.target.getAttribute("id"),
             name: e.target.parentNode.children[1].innerText,
-            target: "",
+            actor: 0,
             delivery: "",
             del_strat: "",
             edu_barrier: "",
