@@ -5,6 +5,9 @@
     <div>
       <h4>Existing Cases</h4>
       <p v-if="cases.length==0">No Cases Exist</p>
+      <div v-for="caseInd in cases" :key="caseInd.id">
+        <p >{{ caseInd.name }}</p>
+     </div>
       <ul>
       </ul>
     </div>
@@ -17,13 +20,24 @@
 <script>
 import db from '@/firebase/init'
 export default {
-  name: "Index",
-  data() {
-    return {
-      cases: [ ]
-    };
+    name: 'Index',
+    data () {
+      return {
+        cases: []
+      }
+    },  
+  created(){
+    db.collection('cases').get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        let caseInd = doc.data()
+         caseInd.id = doc.id
+        this.cases.push(caseInd)
+      })
+    })
   }
-};
+ 
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

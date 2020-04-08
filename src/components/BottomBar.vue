@@ -9,25 +9,53 @@
 </template>
 
 <script>
+import db from "@/firebase/init";
 // import router from "../vue-router";
-
 export default {
   name: "BottomBar",
   props: {
-    case: Object,
+    caseObject: Object,
     nextRoute: String, // for passing in the next route to go to
   },
   data() {
-    return {};
+    return {
+      prevCases: [],
+    }
+    
+  },
+  created(){
+    db.collection('cases').get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        let caseInd = doc.data()
+        this.prevCases.push(caseInd.name)
+      })
+    })  
   },
   methods: {
     saveAndQuit: function (e) {
-      /**
-       * calls validation for parent and then saves to database and
-       * then routes to home page
-       */
-      this.$parent.validate();
-      this.$router.push({ path: "/" });
+     let currentCaseName = this.caseObject.name;
+    if(this.prevCases.includes(currentCaseName)){
+      console.log("is updating ")
+
+
+      db.collection('cases').doc(this.caseObject.case.id).update({
+        name: this.caseObject.name,
+        case: this.caseObject
+        })
+        console.log(this.caseObject)
+    }else{
+      console.log("is adding ")
+        var newCaseRef = db.collection("cases").doc()
+        this.caseObject.case.id = newCaseRef.id
+        newCaseRef.set({
+          name: this.caseObject.name,
+          case: this.caseObject
+        })
+        console.log(this.caseObject)
+     this.$parent.validate();
+     this.$router.push({ path: "/" });
+    }
     },
     back: function (e) {
       /** takes user back one page */
@@ -37,7 +65,33 @@ export default {
       /** calls parent next function to validate
        *  and move to the next page
        */
+
+           let currentCaseName = this.caseObject.name;
+if(this.prevCases.includes(currentCaseName)){
+      console.log("is updating ")
+      db.collection('cases').doc(this.caseObject.case.id).update({
+        name: this.caseObject.name,
+        case: this.caseObject
+        })
+        console.log(this.caseObject)
+    }else{
+      console.log("is adding ")
+        var newCaseRef = db.collection("cases").doc()
+        this.caseObject.case.id = newCaseRef.id
+        newCaseRef.set({
+          name: this.caseObject.name,
+          case: this.caseObject,
+        })
+        console.log(this.caseObject)
+     this.$parent.validate();
+     this.$router.push({ path: "/" });
+    }
+
+
+      
       this.$parent.next();
+    },
+    save: function (e){
     },
   },
 };
@@ -79,3 +133,20 @@ export default {
 .centerBut {
 }
 </style>
+
+
+     let currentCaseName = this.caseObject.name;
+    if(this.prevCases.includes(currentCaseName) ){
+      db.collection('cases').doc(this.caseObject.id).update({
+        name: this.caseObject.name,
+        case: this.case
+        })
+    }else{
+      db.collection('cases').add({
+        name: this.caseObject.name,
+        case: this.caseObject.case,
+        })
+      this.$parent.validate();
+      this.$router.push({ path: "/" });
+    }
+    },
