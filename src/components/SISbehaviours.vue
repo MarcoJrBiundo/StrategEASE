@@ -2,60 +2,65 @@
   <div class="indexclass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="content">
-      <div class="barrier">
-        <select :v-model="behaviourSelected" v-on:update="updateActor">
-          <optgroup
-            v-for="(behaviours, behaviourListIndex) in getBehaviours()"
-            :key="behaviourListIndex"
-            :label="behaviours.actorName"
-          >
+      <div class="selects">
+        <div class="leftSelect">
+          <label>Select an Actor:</label>
+
+          <select v-model="actorSelected">
             <option
-              v-for="(behaviour, behaviourIndex) in behaviours.behaviourList"
-              :key="behaviourIndex"
-              :actor="behaviours.actorId"
-              :value="behaviourIndex"
-              >{{ behaviour }}</option
+              v-for="(actor, index) in actors"
+              :key="index"
+              :value="index"
+              >{{ actor.name }}</option
             >
-          </optgroup>
-        </select>
-
+          </select>
+        </div>
+        <div class="rightSelect">
+          <label>Select a Behaviour for the selected Actor:</label>
+          <select v-model="behaviourSelected">
+            <option
+              v-for="(behaviour, index) in actors[actorSelected].behaviour"
+              :key="index"
+              :value="index"
+              >{{ behaviour.description }}</option
+            >
+          </select>
+        </div>
+      </div>
+      <div
+        class="barrier"
+        v-for="(barrier, index) in actors[actorSelected].behaviour[
+          behaviourSelected
+        ].barriers"
+        :key="index"
+      >
+        <div class="leftInput">
+          <label>Input for barrier {{ index }} </label>
+          <input v-model="barrier.description" :key="barrier.id" />
+        </div>
         <div
-          v-for="(barrier, barrierIndex) in caseObject.case.actors[actorSelected].behaviour[behaviourSelected].barriers"
-          :key="barrierIndex"
+          v-for="(domain, domainIndex) in actors[actorSelected].behaviour[
+            behaviourSelected
+          ].barriers[index].domains"
+          :key="domainIndex"
+          class="rightInput"
         >
-          <input
-            placeholder="Barrier"
-            :v-model="barrier.description"
-            type="text"
-          />
-          <span class="barriers">
-            <select
-              v-for="(domainItem, domainItemIndex) in barrier.domains"
-              :key="domainItemIndex"
-              :v-model="barrier.domainItem"
+          <select v-model="domain.domainNumber">
+            <option
+              v-for="(domainOpt, optIndex) in map.TDFDomains"
+              :key="optIndex"
+              :value="optIndex"
+              >{{ domainOpt[0] }}</option
             >
-              <option
-                v-for="(domain, domainIndex) in domains"
-                :value="domainIndex"
-                :key="domainIndex"
-                >{{ domain[0] }}</option
-              >
-            </select>
-
-            <input
-              v-on:click="addDomain(barrierIndex)"
-              type="button"
-              value="Add Domain"
-            />
-          </span>
+          </select>
         </div>
         <input
-          id="addBarrier"
-          v-on:click="addBarrier()"
+          v-on:click="addDomain(barrier)"
           type="button"
-          value="+"
+          value="Add a Domain"
         />
       </div>
+      <input v-on:click="addBarrier()" type="button" value="Add a Barrier" />
     </div>
     <BottomBar :caseObject="caseObject"></BottomBar>
   </div>
@@ -71,94 +76,76 @@ export default {
   name: "SISbehaviours",
   components: {
     CommonMainPage,
-    BottomBar,
+    BottomBar
   },
   props: {
     map: Object,
-    caseObject: Object,
+    caseObject: { type: Object }
   },
   data() {
     return {
       domains: this.map.TDFDomains,
-      actors: this.caseObject.case.actors,
-      actorSelected: 0,
-      behaviourSelected: 0,
-      selectedDomain: [0],
-      barriers: [{id: 0, description: "", domains: [""]}],
       title: "Barriers to Change",
       text:
         "For each change you identified in the previous section, identify the barriers to making that change. You can identify as many barriers as you want.  Next, use the dropdown list to categorize each barrier to one of 14 different barrier types. You can identify up to two different categories that the barrier aligns with. Definitions of the barrier types and examples of how to do this step are available in the Helpful Links.This step assumes that you have already performed a barriers assessment. If not, consult the Helpful Links to guide you through the process of doing a barriers assessment",
       links: [
         { link: "www.google.com", display: "www.habits.com" },
         { link: "www.google.com", display: "www.breakinghabits.org" },
-        { link: "www.google.com", display: "www.implement.com" },
+        { link: "www.google.com", display: "www.implement.com" }
       ],
+      actors: this.caseObject.case.actors,
+      actorSelected: 0,
+      behaviourSelected: 0
     };
   },
-  mounted: function () {
+  mounted: function() {
     this.caseObject.case.actors.forEach(actor => {
       console.log(actor);
-      actor.behaviour.forEach((behaviour) => {
+      actor.behaviour.forEach(behaviour => {
         console.log(behaviour);
         if (!behaviour.barriers) {
-          behaviour.barriers = [{ id: 0, description: "", domains: [0] }];
+          behaviour.barriers = [
+            {
+              id: 0,
+              description: "",
+              domains: [
+                {
+                  domainNumber: 0
+                }
+              ]
+            }
+          ];
         }
-        // if (behaviour.barriers.length < 1) {
-        //   behaviour.barriers.push([{ id: 0, description: "", domains: [0] }]);
-        // }
       });
     });
   },
   methods: {
-    updateActor: function (e) {
-      this.actorSelected = e.target.selectedOptions[0].getAttribute("actor");
-      this.behaviourSelected = e.target.selectedOptions[0].value;
-    },
-    // getBarriers: function (e) {
-    //   var barriers = this.actors[this.actorSelected].behaviour[
-    //     this.behaviourSelected
-    //   ].barriers;
-
-    //   if (barriers == null) return [{ id: 0, description: "", domains: [0] }];
-    //   return barriers;
-    // },
-    getBehaviours: function (e) {
-      var behaviours = [];
-      for (var actorIndex in this.actors) {
-        var behavioursToAdd = [];
-
-        for (var behaviourIndex in this.actors[actorIndex].behaviour)
-          behavioursToAdd.push(
-            this.actors[actorIndex].behaviour[behaviourIndex].description
-          );
-
-        behaviours.push({
-          actorId: this.actors[actorIndex].id,
-          actorName: this.actors[actorIndex].name,
-          behaviourList: behavioursToAdd,
-        });
-      }
-      return behaviours;
-    },
-    addBarrier: function (e) {
-      this.caseObject.case.actors[this.actorSelected].behaviour[
+    addBarrier: function() {
+      this.actors[this.actorSelected].behaviour[
         this.behaviourSelected
-      ].barriers.push({
-        id: this.caseObject.case.actors[this.actorSelected].behaviour[
-          this.behaviourSelected
-        ].barriers.length,
-        description: "",
-        domains: [0],
+      ].barriers.push([
+        {
+          id: this.actors[this.actorSelected].behaviour[this.behaviourSelected]
+            .barriers.length,
+          description: "",
+          domains: [
+            {
+              domainNumber: 0
+            }
+          ]
+        }
+      ]);
+      this.$forceUpdate();
+    },
+    addDomain: function(barrier) {
+      barrier.domains.push({
+        domainNumber: 0
       });
+      this.$forceUpdate();
     },
-    addDomain: function (barrierIndex) {
-      this.caseObject.case.actors[this.actorSelected].behaviour[
-        this.behaviourSelected
-      ].barriers[barrierIndex].domains.push(0);
-    },
-    next: function () {},
-    validate: function () {},
-  },
+    next: function() {},
+    validate: function() {}
+  }
 };
 </script>
 
@@ -204,5 +191,34 @@ export default {
   display: block;
   /* overflow-y: scroll; */
   max-height: 450px;
+}
+
+select {
+  display: block;
+}
+
+.leftSelect {
+  width: 48%;
+  float: left;
+}
+
+.rightSelect {
+  float: right;
+  width: 48%;
+}
+.barrier {
+  display: flexbox;
+}
+
+.leftInput {
+  width: 47%;
+  /* clear: both;
+  float: left; */
+}
+
+.rightInput {
+  width: 47%;
+  float: right;
+  clear: right;
 }
 </style>
