@@ -16,7 +16,11 @@
               {
                 "id": 0,
                 "description": "",
-                "domains": [0]
+                "domains": [
+                  {
+                    "domainNumber": 0
+                  }
+                ]
               }
             ]
           }
