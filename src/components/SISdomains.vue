@@ -116,6 +116,7 @@ export default {
       }
     },
     getStrategies: function () {
+      //filter based off the domains in the barriers created
       var foundStrategies = [];
 
       this.domains[this.selectedDomain][1].split(",").forEach((funcIndex) => {

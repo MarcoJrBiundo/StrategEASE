@@ -21,6 +21,7 @@ export default new Router({
       path: "/",
       name: "Index",
       component: Index,
+      props: { caseObject: caseObject }
     },
     {
       path: "/dti-description",
@@ -58,6 +59,7 @@ export default new Router({
       component: OSStrategy,
       props: { map: strategyMap, caseObject: caseObject },
     },
+    
   ],
 });
 
