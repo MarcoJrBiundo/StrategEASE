@@ -59,6 +59,7 @@ export default new Router({
       component: OSStrategy,
       props: { map: strategyMap, caseObject: caseObject },
     },
+    
   ],
 });
 
