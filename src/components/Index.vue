@@ -6,7 +6,7 @@
       <h4>Existing Cases</h4>
       <p v-if="cases.length==0">No Cases Exist</p>
       <div v-for="caseInd in cases" :key="caseInd.id">
-        <p >{{ caseInd.name }}</p>
+        <a class="openCase" v-on:click="openCase(caseInd)">{{ caseInd.name }}</a>
      </div>
       <ul>
       </ul>
@@ -20,12 +20,15 @@
 <script>
 import db from '@/firebase/init'
 export default {
-    name: 'Index',
-    data () {
-      return {
-        cases: []
-      }
-    },  
+  name: 'Index',
+  props: {
+    caseObject: Object
+  },
+  data () {
+    return {
+      cases: []
+    }
+  },  
   created(){
     db.collection('cases').get()
     .then(snapshot => {
@@ -35,8 +38,12 @@ export default {
         this.cases.push(caseInd)
       })
     })
+  },
+  methods: {
+    openCase: function(caseIndividual){
+      this.caseObject.case = caseIndividual.case.case;
+    }
   }
- 
 }
 </script>
 
@@ -52,6 +59,17 @@ export default {
   color: #818181;
   color: #006310;
   opacity: 1;
+}
+
+.indexclass .openCase {
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  color: #206aa2;
+  opacity: 1;
+}
+.openCase {
+  cursor:pointer;
 }
 
 .indexclass {

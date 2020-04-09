@@ -3,7 +3,7 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="content">
       <div class="barrier">
-        <select :v-model="behaviourSelected" @change="updateActor">
+        <select :v-model="behaviourSelected" v-on:update="updateActor">
           <optgroup
             v-for="(behaviours, behaviourListIndex) in getBehaviours()"
             :key="behaviourListIndex"
