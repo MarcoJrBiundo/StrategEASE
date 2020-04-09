@@ -55,7 +55,7 @@
           </select>
         </div>
         <input
-          v-on:click="addDomain(barrier)"
+          v-on:click="addDomain(index)"
           type="button"
           value="Add a Domain"
         />
@@ -110,7 +110,7 @@ export default {
               description: "",
               domains: [
                 {
-                  domainNumber: 0
+                  domainNumber: -9
                 }
               ]
             }
@@ -123,28 +123,111 @@ export default {
     addBarrier: function() {
       this.actors[this.actorSelected].behaviour[
         this.behaviourSelected
-      ].barriers.push([
-        {
-          id: this.actors[this.actorSelected].behaviour[this.behaviourSelected]
-            .barriers.length,
-          description: "",
-          domains: [
-            {
-              domainNumber: 0
-            }
-          ]
-        }
-      ]);
-      this.$forceUpdate();
-    },
-    addDomain: function(barrier) {
-      barrier.domains.push({
-        domainNumber: 0
+      ].barriers.push({
+        id: this.actors[this.actorSelected].behaviour[this.behaviourSelected]
+          .barriers.length,
+        description: "",
+        domains: [
+          {
+            domainNumber: -9
+          }
+        ]
       });
       this.$forceUpdate();
     },
-    next: function() {},
-    validate: function() {}
+    addDomain: function(index) {
+      this.actors[this.actorSelected].behaviour[
+        this.behaviourSelected
+      ].barriers[index].domains.push({
+        domainNumber: -9
+      });
+      barrier.domains.push;
+      this.$forceUpdate();
+    },
+    next: function() {
+      if (this.validate()) {
+        this.$router.push({ path: "/sis-domains" });
+      } else {
+        alert("Please ensure that all fields are filled before moving on.");
+      }
+    },
+    validate: function() {
+      // this.actors.forEach(actor => {
+      //   actor.behaviour.forEach(behaviour => {
+      //     behaviour.barriers.forEach(barrier => {
+      //       barrier.domains.forEach(domain => {
+      //         if (domain.domainnumber && domain.domainNumber === -1) {
+      //           return false;
+      //         }
+      //       });
+      //       if (barrier.description && barrier.description.length < 2) {
+      //         return false;
+      //       }
+      //     });
+      //     if (behaviour.description && behaviour.description.length < 2) {
+      //       return false;
+      //     }
+      //   });
+      //   if (actor.name.length < 2) {
+      //     return false;
+      //   }
+      // });
+
+      for (let actor = 0; actor < this.actors.length; actor++) {
+        for (
+          let behav = 0;
+          behav < this.actors[actor].behaviour.length;
+          behav++
+        ) {
+          for (
+            let barrier = 0;
+            barrier < this.actors[actor].behaviour[behav].barriers.length;
+            barrier++
+          ) {
+            for (
+              let domain = 0;
+              domain <
+              this.actors[actor].behaviour[behav].barriers[barrier].domains
+                .length;
+              domain++
+            ) {
+              if (
+                this.actors[actor].behaviour[behav].barriers[barrier].domains[
+                  domain
+                ].domainNumber == -1
+              ) {
+                console.log(
+                  "error in: \nActor: " +
+                    actor +
+                    "\nbehaviour: " +
+                    behav +
+                    "\nBarrier: " +
+                    barrier +
+                    "\nDomain: " +
+                    domain
+                );
+                return false;
+              }
+            }
+            if (
+              this.actors[actor].behaviour[behav].barriers[barrier].description
+                .length < 2
+            ) {
+              console.log(
+                "error in: \nActor: " +
+                  actor +
+                  "\nbehaviour: " +
+                  behav +
+                  "\nBarrier: " +
+                  barrier
+              );
+              return false;
+            }
+          }
+        }
+      }
+      return true;
+    }
   }
 };
 </script>

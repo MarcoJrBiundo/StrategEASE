@@ -26,12 +26,12 @@ export default {
   name: "DTIdescription",
   components: {
     CommonMainPage,
-    BottomBar,
+    BottomBar
   },
   props: {
     caseObject: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   data() {
     return {
@@ -41,12 +41,12 @@ export default {
       links: [
         { link: "www.google.com", display: "www.habits.com" },
         { link: "www.google.com", display: "www.breakinghabits.org" },
-        { link: "www.google.com", display: "www.implement.com" },
-      ],
+        { link: "www.google.com", display: "www.implement.com" }
+      ]
     };
   },
   methods: {
-    next: function () {
+    next: function() {
       // console.log(this.caseObject);
       if (
         this.caseObject.case.name &&
@@ -56,14 +56,14 @@ export default {
         this.caseObject.case.description.length > 0 &&
         this.caseObject.case.evidence.length > 0
       ) {
-        alert("valid");
+        // alert("valid");
         this.$router.push({ path: "dti-whowillchange" });
       } else {
-        alert("invalid");
+        alert("Please fill in all fields to move on.");
       }
     },
-    validate: function () {},
-  },
+    validate: function() {}
+  }
 };
 </script>
 

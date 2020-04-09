@@ -15,67 +15,72 @@ export default {
   name: "BottomBar",
   props: {
     caseObject: Object,
-    nextRoute: String, // for passing in the next route to go to
+    nextRoute: String // for passing in the next route to go to
   },
   data() {
     return {
-      prevCases: [],
-    }
-    
+      prevCases: []
+    };
   },
-  created(){
-    db.collection('cases').get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        let caseInd = doc.data()
-        this.prevCases.push(caseInd.id)
-      })
-    })  
+  created() {
+    db.collection("cases")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let caseInd = doc.data();
+          this.prevCases.push(caseInd.id);
+        });
+      });
   },
   methods: {
-    back: function (e) {
+    back: function(e) {
       /** takes user back one page */
       this.$router.go(-1);
     },
-    saveAndQuit: function (e) {
+    saveAndQuit: function(e) {
       let caseId = this.caseObject.id;
 
-      if(this.prevCases.includes(caseId)){
+      if (this.prevCases.includes(caseId)) {
         this.updateCase();
-      }else{
+      } else {
         this.createCase();
         this.$parent.validate();
         this.$router.push({ path: "/" });
       }
     },
-    next: function (e) {
+    next: function(e) {
       /** calls parent next function to validate
        *  and move to the next page
        */
+      console.log(this.$parent.validate());
       let caseId = this.caseObject.id;
-      if(this.prevCases.includes(caseId)){
+      if (this.prevCases.includes(caseId)) {
         this.updateCase();
-      }else{
+      } else {
         this.createCase();
         this.$parent.validate();
         this.$router.push({ path: "/" });
       }
       this.$parent.next();
     },
-    updateCase: function(){
+    updateCase: function() {
       console.log("is updating ");
       console.log(this.caseObject.id);
-      db.collection('cases').doc(this.caseObject.id).update(this.caseObject).then(function() {console.log("Document successfully written!");});
+      db.collection("cases")
+        .doc(this.caseObject.id)
+        .update(this.caseObject)
+        .then(function() {
+          console.log("Document successfully written!");
+        });
     },
-    createCase: function(){
-      console.log("is adding ")
+    createCase: function() {
+      console.log("is adding ");
       var newCaseRef = db.collection("cases").doc();
       this.caseObject.id = newCaseRef.id;
       newCaseRef.set(this.caseObject);
     },
-    save: function (e){
-    },
-  },
+    save: function(e) {}
+  }
 };
 </script>
 
@@ -116,19 +121,9 @@ export default {
 }
 </style>
 
-
-     let currentCaseName = this.caseObject.name;
-    if(this.prevCases.includes(currentCaseName) ){
-      db.collection('cases').doc(this.caseObject.id).update({
-        name: this.caseObject.name,
-        case: this.case
-        })
-    }else{
-      db.collection('cases').add({
-        name: this.caseObject.name,
-        case: this.caseObject.case,
-        })
-      this.$parent.validate();
-      this.$router.push({ path: "/" });
-    }
-    },
+let currentCaseName = this.caseObject.name;
+if(this.prevCases.includes(currentCaseName) ){
+db.collection('cases').doc(this.caseObject.id).update({ name:
+this.caseObject.name, case: this.case }) }else{ db.collection('cases').add({
+name: this.caseObject.name, case: this.caseObject.case, })
+this.$parent.validate(); this.$router.push({ path: "/" }); } },
