@@ -66,29 +66,23 @@ export default {
        *  and move to the next page
        */
 
-           let currentCaseName = this.caseObject.name;
-if(this.prevCases.includes(currentCaseName)){
-      console.log("is updating ")
-      db.collection('cases').doc(this.caseObject.case.id).update({
-        name: this.caseObject.name,
-        case: this.caseObject
-        })
-        console.log(this.caseObject)
-    }else{
-      console.log("is adding ")
-        var newCaseRef = db.collection("cases").doc()
-        this.caseObject.case.id = newCaseRef.id
+      let currentCaseName = this.caseObject.name;
+      if(this.prevCases.includes(currentCaseName)){
+        console.log("is updating ");
+        db.collection('cases').doc(this.caseObject.case.id).set(this.caseObject.case);
+        console.log(this.caseObject);
+      }else{
+        console.log("is adding ");
+        var newCaseRef = db.collection("cases").doc();
+        this.caseObject.case.id = newCaseRef.id;
         newCaseRef.set({
           name: this.caseObject.name,
           case: this.caseObject,
-        })
-        console.log(this.caseObject)
-     this.$parent.validate();
-     this.$router.push({ path: "/" });
-    }
-
-
-      
+        });
+        console.log(this.caseObject);
+        this.$parent.validate();
+        this.$router.push({ path: "/" });
+      }
       this.$parent.next();
     },
     save: function (e){

@@ -33,15 +33,18 @@ export default {
     db.collection('cases').get()
     .then(snapshot => {
       snapshot.forEach(doc => {
-        let caseInd = doc.data()
-         caseInd.id = doc.id
-        this.cases.push(caseInd)
+        let caseInd = doc.data();
+        caseInd.id = doc.id;
+
+        this.cases.push(caseInd);
       })
     })
   },
   methods: {
     openCase: function(caseIndividual){
-      this.caseObject.case = caseIndividual.case.case;
+      console.log(caseIndividual);
+      this.caseObject.case = caseIndividual.case;
+      this.$router.push({ path: "dti-description" });
     }
   }
 }
