@@ -4,9 +4,9 @@
     <p>Create a new project to get started, or continue working on a saved project</p>
     <div>
       <h4>Existing Cases</h4>
-      <p v-if="cases.length==0">No Cases Exist</p>
-      <div v-for="caseInd in cases" :key="caseInd.id">
-        <a class="openCase" v-on:click="openCase(caseInd)">{{ caseInd.name }}</a>
+      <p v-if="caseNav.length==0">No Cases Exist</p>
+      <div v-for="item in caseNav" :key="item.id">
+        <a class="openCase" v-on:click="openCase(item.case, item.id)">{{ item.case.name }}</a>
      </div>
       <ul>
       </ul>
@@ -26,7 +26,7 @@ export default {
   },
   data () {
     return {
-      cases: []
+      caseNav: []
     }
   },  
   created(){
@@ -36,14 +36,18 @@ export default {
         let caseInd = doc.data();
         caseInd.id = doc.id;
 
-        this.cases.push(caseInd);
+        this.caseNav.push({
+          case: caseInd.case, 
+          id: caseInd.id
+        });
       })
     })
   },
   methods: {
-    openCase: function(caseIndividual){
-      console.log(caseIndividual);
-      this.caseObject.case = caseIndividual.case;
+    openCase: function(pastCase, id){
+      this.caseObject.id = id;
+      this.caseObject.case = pastCase;
+      console.log(this.caseObject);
       this.$router.push({ path: "dti-description" });
     }
   }

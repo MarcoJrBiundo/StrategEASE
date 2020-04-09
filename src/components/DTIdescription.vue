@@ -4,13 +4,13 @@
     <div class="content">
       <div class="inputs">
         <label for="case">Case:</label>
-        <input type="text" name="case" v-model="caseObject.name" />
+        <input type="text" name="case" v-model="caseObject.case.name" />
         <label for="case">Describe the intervention you are implmenting:</label>
-        <input type="text" name="case" v-model="caseObject.description" />
+        <input type="text" name="case" v-model="caseObject.case.description" />
         <label for="case"
           >Describe the evidence supporting the intervention:</label
         >
-        <input type="text" name="case" v-model="caseObject.evidence" />
+        <input type="text" name="case" v-model="caseObject.case.evidence" />
       </div>
     </div>
     <BottomBar :caseObject="caseObject"></BottomBar>
@@ -49,12 +49,12 @@ export default {
     next: function () {
       // console.log(this.caseObject);
       if (
-        this.caseObject.name &&
-        this.caseObject.description &&
-        this.caseObject.evidence &&
-        this.caseObject.name.length > 0 &&
-        this.caseObject.description.length > 0 &&
-        this.caseObject.evidence.length > 0
+        this.caseObject.case.name &&
+        this.caseObject.case.description &&
+        this.caseObject.case.evidence &&
+        this.caseObject.case.name.length > 0 &&
+        this.caseObject.case.description.length > 0 &&
+        this.caseObject.case.evidence.length > 0
       ) {
         alert("valid");
         this.$router.push({ path: "dti-whowillchange" });

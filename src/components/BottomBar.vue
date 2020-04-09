@@ -28,62 +28,50 @@ export default {
     .then(snapshot => {
       snapshot.forEach(doc => {
         let caseInd = doc.data()
-        this.prevCases.push(caseInd.name)
+        this.prevCases.push(caseInd.id)
       })
     })  
   },
   methods: {
-    saveAndQuit: function (e) {
-     let currentCaseName = this.caseObject.name;
-    if(this.prevCases.includes(currentCaseName)){
-      console.log("is updating ")
-
-
-      db.collection('cases').doc(this.caseObject.case.id).update({
-        name: this.caseObject.name,
-        case: this.caseObject
-        })
-        console.log(this.caseObject)
-    }else{
-      console.log("is adding ")
-        var newCaseRef = db.collection("cases").doc()
-        this.caseObject.case.id = newCaseRef.id
-        newCaseRef.set({
-          name: this.caseObject.name,
-          case: this.caseObject
-        })
-        console.log(this.caseObject)
-     this.$parent.validate();
-     this.$router.push({ path: "/" });
-    }
-    },
     back: function (e) {
       /** takes user back one page */
       this.$router.go(-1);
+    },
+    saveAndQuit: function (e) {
+      let caseId = this.caseObject.id;
+
+      if(this.prevCases.includes(caseId)){
+        this.updateCase();
+      }else{
+        this.createCase();
+        this.$parent.validate();
+        this.$router.push({ path: "/" });
+      }
     },
     next: function (e) {
       /** calls parent next function to validate
        *  and move to the next page
        */
-
-      let currentCaseName = this.caseObject.name;
-      if(this.prevCases.includes(currentCaseName)){
-        console.log("is updating ");
-        db.collection('cases').doc(this.caseObject.case.id).set(this.caseObject.case);
-        console.log(this.caseObject);
+      let caseId = this.caseObject.id;
+      if(this.prevCases.includes(caseId)){
+        this.updateCase();
       }else{
-        console.log("is adding ");
-        var newCaseRef = db.collection("cases").doc();
-        this.caseObject.case.id = newCaseRef.id;
-        newCaseRef.set({
-          name: this.caseObject.name,
-          case: this.caseObject,
-        });
-        console.log(this.caseObject);
+        this.createCase();
         this.$parent.validate();
         this.$router.push({ path: "/" });
       }
       this.$parent.next();
+    },
+    updateCase: function(){
+      console.log("is updating ");
+      console.log(this.caseObject.id);
+      db.collection('cases').doc(this.caseObject.id).update(this.caseObject).then(function() {console.log("Document successfully written!");});
+    },
+    createCase: function(){
+      console.log("is adding ")
+      var newCaseRef = db.collection("cases").doc();
+      this.caseObject.id = newCaseRef.id;
+      newCaseRef.set(this.caseObject);
     },
     save: function (e){
     },
