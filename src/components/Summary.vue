@@ -1,32 +1,28 @@
 <template>
   <div class="indexclass">
-    <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="content">
       <div class="inputs">
-        <label for="case">Case:</label>
-        <input type="text" name="case" v-model="caseObject.name" />
-        <label for="case">Describe the intervention you are implmenting:</label>
-        <input type="text" name="case" v-model="caseObject.description" />
-        <label for="case"
-          >Describe the evidence supporting the intervention:</label
-        >
-        <input type="text" name="case" v-model="caseObject.evidence" />
+        <div ref='content'>
+          <h1>{{this.caseObject.case.name}}</h1>
+          <p>Project Description: {{this.caseObject.case.description}}</p>
+          <p>Project Evidence: {{this.caseObject.case.evidence}}</p>
+           <p>Who will change: {{this.caseObject.case.actors[0].name}}</p>
+           <p>What will change: {{this.caseObject.case.actors[0].behaviour[0].description}}</p>
+        </div>
+           <button class="btn" @click="downloadPDF">Download PDF</button>
       </div>
     </div>
-    <BottomBar :caseObject="caseObject"></BottomBar>
+ 
   </div>
 </template>
 
 <script>
 import db from "@/firebase/init";
-import CommonMainPage from "./CommonMainPage";
-import BottomBar from "./BottomBar";
+import jsPDF from 'jspdf';
 
 export default {
   name: "Summary",
   components: {
-    CommonMainPage,
-    BottomBar,
   },
   props: {
     caseObject: {
@@ -35,37 +31,54 @@ export default {
   },
   data() {
     return {
-      title: "Defining the Intervention",
+      title: "Summary",
       text:
-        "The “intervention” includes: \n1) what you are implementing -  the practice, procedure, policy or program, and: \n2) how you are implementing -  the strategies you are using to implement that practice, procedure, policy or program. ",
+        "This is the Summary Page ",
       links: [
         { link: "www.google.com", display: "www.habits.com" },
         { link: "www.google.com", display: "www.breakinghabits.org" },
         { link: "www.google.com", display: "www.implement.com" },
       ],
     };
+  },  created(){
+
+    console.log(this.caseObject)
+ 
   },
   methods: {
-    next: function () {
-      // console.log(this.caseObject);
-      if (
-        this.caseObject.name &&
-        this.caseObject.description &&
-        this.caseObject.evidence &&
-        this.caseObject.name.length > 0 &&
-        this.caseObject.description.length > 0 &&
-        this.caseObject.evidence.length > 0
-      ) {
-        alert("valid");
-        this.$router.push({ path: "dti-whowillchange" });
-      } else {
-        alert("invalid");
-      }
-    },
-    validate: function () {},
+
+    downloadPDF(){
+      const doc = new jsPDF()
+
+      const html = this.$refs.content.innerHTML
+      
+      doc.fromHTML(html,15,15,{
+        width: 150
+      })
+      
+
+      doc.save("output.pdf")
+
+    }
+   
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style></style>
+<style>
+.navbar {
+    padding: 0 20px;
+     top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 119px;
+    background: #14B49E 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 0px 0px 0px 41px;
+    opacity: 1;  
+}
+
+
+
+</style>

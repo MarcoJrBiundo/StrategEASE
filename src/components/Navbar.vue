@@ -48,7 +48,10 @@
           </li>
         </ul>
       </li>
-      <li><a href="#summary">Summary</a></li>
+      <li> 
+        <router-link :to="{ name: 'Summary' }" >
+              Strategies
+            </router-link></li>
     </ul>
   </div>
 </template>
