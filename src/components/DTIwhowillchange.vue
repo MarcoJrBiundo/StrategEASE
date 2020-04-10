@@ -12,6 +12,12 @@
           v-model="actor.name"
           class="actor"
         />
+        <input
+          v-if="actorIndex !== 0"
+          v-on:click="removeActor(actorIndex)"
+          type="button"
+          value="Remove Actor"
+        />
         <div
           v-for="(behav, behavIndex) in actor.behaviour"
           :key="behavIndex"
@@ -21,6 +27,12 @@
             :placeholder="placeholderSecondary"
             v-model="behav.description"
             class="behaviour"
+          />
+          <input
+            v-if="behavIndex !== 0"
+            v-on:click="removeBehaviour(actorIndex, behavIndex)"
+            type="button"
+            value="Remove Behaviour"
           />
         </div>
 
@@ -46,12 +58,12 @@ export default {
   name: "DTIwhowillchange",
   components: {
     CommonMainPage,
-    BottomBar,
+    BottomBar
   },
   props: {
     caseObject: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   data() {
     return {
@@ -61,21 +73,21 @@ export default {
       links: [
         { link: "www.google.com", display: "www.habits.com" },
         { link: "www.google.com", display: "www.breakinghabits.org" },
-        { link: "www.google.com", display: "www.implement.com" },
+        { link: "www.google.com", display: "www.implement.com" }
       ],
       placeholderMain: "Actor or Group Name",
       placeholderSecondary: "Behavior to be Changed",
-      actors: this.caseObject.case.actors,
+      actors: this.caseObject.case.actors
     };
   },
-  mounted: function () {
+  mounted: function() {
     if (this.actors.length < 1) {
       this.addActor();
       // addBehaviour();
     }
   },
   methods: {
-    next: function () {
+    next: function() {
       /**
        * this method calls the save function and then moves to the next page
        */
@@ -94,7 +106,7 @@ export default {
         alert("Invalid");
       }
     },
-    validate: function () {
+    validate: function() {
       // a local object to hold the filtered values
       var localActors = [];
 
@@ -102,7 +114,7 @@ export default {
        * filters the actors dependent on the actor name having a length and
        * if any of the child behaviours have lengths
        */
-      this.actors.forEach((actor) => {
+      this.actors.forEach(actor => {
         if (actor.name.length > 0) {
           var toAdd = false;
           for (var i = 0; i < actor.behaviour.length; i++) {
@@ -123,7 +135,7 @@ export default {
        */
       for (var i = 0; i < localActors.length; i++) {
         localActors[i].behaviour = localActors[i].behaviour.filter(
-          (value) => value.description.length > 0
+          value => value.description.length > 0
         );
       }
       this.caseObject.case.actors = localActors;
@@ -135,7 +147,7 @@ export default {
       this.actors.push({
         id: this.actors.length,
         name: "",
-        behaviour: [{ id: 0, description: "" }],
+        behaviour: [{ id: 0, description: "" }]
       });
     },
     addBehaviour(index) {
@@ -144,10 +156,18 @@ export default {
        */
       this.actors[index].behaviour.push({
         id: this.actors[index].behaviour.length,
-        description: "",
+        description: ""
       });
     },
-  },
+    removeActor: function(actor) {
+      this.actors.pop(actor);
+      this.$forceUpdate();
+    },
+    removeBehaviour: function(actor, behaviour) {
+      this.actors[actor].behaviour.pop(behaviour);
+      this.$forceUpdate();
+    }
+  }
 };
 </script>
 
