@@ -38,6 +38,13 @@
           <label>Input for barrier {{ index }} </label>
           <input v-model="barrier.description" :key="barrier.id" />
         </div>
+
+        <input
+          v-if="index !== 0"
+          v-on:click="removeBarrier(index)"
+          type="button"
+          value="Remove a Barrier"
+        />
         <div
           v-for="(domain, domainIndex) in actors[actorSelected].behaviour[
             behaviourSelected
@@ -53,6 +60,12 @@
               >{{ domainOpt[0] }}</option
             >
           </select>
+          <input
+            v-if="domainIndex !== 0"
+            v-on:click="removeDomain(index, domainIndex)"
+            type="button"
+            value="Remove a Domian"
+          />
         </div>
         <input
           v-on:click="addDomain(index)"
@@ -144,6 +157,18 @@ export default {
       barrier.domains.push;
       this.$forceUpdate();
     },
+    removeBarrier: function(barrier) {
+      this.actors[this.actorSelected].behaviour[
+        this.behaviourSelected
+      ].barriers.pop(barrier);
+      this.$forceUpdate();
+    },
+    removeDomain: function(barrier, domain) {
+      this.actors[this.actorSelected].behaviour[
+        this.behaviourSelected
+      ].barriers[barrier].domains.pop(domain);
+      this.$forceUpdate();
+    },
     next: function() {
       if (this.validate()) {
         this.$router.push({ path: "/sis-domains" });
@@ -152,27 +177,6 @@ export default {
       }
     },
     validate: function() {
-      // this.actors.forEach(actor => {
-      //   actor.behaviour.forEach(behaviour => {
-      //     behaviour.barriers.forEach(barrier => {
-      //       barrier.domains.forEach(domain => {
-      //         if (domain.domainnumber && domain.domainNumber === -1) {
-      //           return false;
-      //         }
-      //       });
-      //       if (barrier.description && barrier.description.length < 2) {
-      //         return false;
-      //       }
-      //     });
-      //     if (behaviour.description && behaviour.description.length < 2) {
-      //       return false;
-      //     }
-      //   });
-      //   if (actor.name.length < 2) {
-      //     return false;
-      //   }
-      // });
-
       for (let actor = 0; actor < this.actors.length; actor++) {
         for (
           let behav = 0;
@@ -194,7 +198,7 @@ export default {
               if (
                 this.actors[actor].behaviour[behav].barriers[barrier].domains[
                   domain
-                ].domainNumber == -1
+                ].domainNumber < 0
               ) {
                 console.log(
                   "error in: \nActor: " +
