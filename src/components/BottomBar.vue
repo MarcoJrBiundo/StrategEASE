@@ -93,6 +93,8 @@ export default {
   justify-content: space-between;
   margin-right: 5%;
   margin-left: 5%;
+  opacity: 1;
+  background: white;
 }
 
 .botBut {

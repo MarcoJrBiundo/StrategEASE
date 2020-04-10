@@ -78,3 +78,7 @@ input[type="button"] {
   color: #206aa2;
   opacity: 1;
 }
+
+.remove {
+  background: #f54b42 !important;
+}

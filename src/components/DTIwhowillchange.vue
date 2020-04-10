@@ -7,22 +7,21 @@
         :key="actorIndex"
         class="actor"
       >
+        <label class="largeLabel"
+          >Actor #{{ actorIndex + 1 }}: {{ actor.name }}</label
+        >
         <input
           :placeholder="placeholderMain"
           v-model="actor.name"
           class="actor"
-        />
-        <input
-          v-if="actorIndex !== 0"
-          v-on:click="removeActor(actorIndex)"
-          type="button"
-          value="Remove Actor"
         />
         <div
           v-for="(behav, behavIndex) in actor.behaviour"
           :key="behavIndex"
           class="behaviour"
         >
+          <label class="smallLabel">Behaviour #{{ behavIndex + 1 }}</label>
+
           <input
             :placeholder="placeholderSecondary"
             v-model="behav.description"
@@ -33,6 +32,7 @@
             v-on:click="removeBehaviour(actorIndex, behavIndex)"
             type="button"
             value="Remove Behaviour"
+            class="removeBehaviour remove"
           />
         </div>
 
@@ -41,8 +41,21 @@
           type="button"
           value="Add Behaviour"
         />
+        <input
+          v-if="actorIndex !== 0"
+          v-on:click="removeActor(actorIndex)"
+          type="button"
+          value="Remove Actor"
+          class="ActorButton removeActor remove"
+        />
       </div>
-      <input v-on:click="addActor()" type="button" value="Add Actor" />
+
+      <input
+        v-on:click="addActor()"
+        type="button"
+        value="Add Actor"
+        class="ActorButton"
+      />
     </div>
     <BottomBar :caseObject="caseObject"></BottomBar>
   </div>
@@ -175,26 +188,44 @@ export default {
 <style>
 .actor {
   clear: both;
+  margin-top: 1em;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 30px;
+  border: 1px #00000029 solid;
+  opacity: 1;
+  padding: 10px;
 }
 .actor > input {
-  width: 48%;
+  /* width: 48%; */
 }
 
 .behaviour {
-  float: right;
+  /* float: right;
   clear: right;
-  width: 48%;
+  width: 48%; */
 }
 
 .actor > input[type="button"] {
-  margin-right: 36.5%;
+  /* margin-right: 36.5%; */
 }
 
 .actor input[type="button"] {
-  /* margin-right: 48.5%; */
-  width: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.ActorButton {
   display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.removeBehaviour {
   float: right;
-  clear: right;
+}
+
+.removeActor {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
 }
 </style>

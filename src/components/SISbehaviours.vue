@@ -17,7 +17,7 @@
         </div>
         <div class="rightSelect">
           <label class="largeLabel"
-            >Select a Behaviour for the selected Actor:</label
+            >Select a Behaviour For The Current Actor:</label
           >
           <select v-model="behaviourSelected">
             <option
@@ -37,7 +37,7 @@
         :key="index"
       >
         <div class="leftInput">
-          <label class="smallLabel">Input for barrier {{ index }} </label>
+          <label class="smallLabel">Barrier #{{ index + 1 }} </label>
           <input v-model="barrier.description" :key="barrier.id" />
         </div>
 
@@ -46,7 +46,7 @@
           v-on:click="removeBarrier(index)"
           type="button"
           value="Remove Barrier"
-          class="barrierButton"
+          class="barrierButton remove"
         />
         <div
           v-for="(domain, domainIndex) in actors[actorSelected].behaviour[
@@ -55,7 +55,7 @@
           :key="domainIndex"
           class="rightInput"
         >
-          <label class="smallLabel">Domain: {{ domainIndex }}</label>
+          <label class="smallLabel">Domain #{{ domainIndex + 1 }}</label>
           <select v-model="domain.domainNumber">
             <option
               v-for="(domainOpt, optIndex) in map.TDFDomains"
@@ -69,6 +69,7 @@
             v-on:click="removeDomain(index, domainIndex)"
             type="button"
             value="Remove a Domian"
+            class="remove removeDomain"
           />
         </div>
         <input
@@ -326,7 +327,6 @@ select {
 }
 
 .barrier input[type="button"] {
-  margin-left: 20px;
   margin-top: 1em;
 }
 
@@ -335,5 +335,9 @@ select {
   margin-left: auto;
   margin-top: 10px;
   display: block;
+}
+
+.removeDomain {
+  float: right;
 }
 </style>
