@@ -3,11 +3,13 @@
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="content">
       <div class="inputs">
-        <label for="case">Case:</label>
+        <label for="case" class="largeLabel">Case:</label>
         <input type="text" name="case" v-model="caseObject.case.name" />
-        <label for="case">Describe the intervention you are implmenting:</label>
+        <label for="case" class="largeLabel"
+          >Describe the intervention you are implmenting:</label
+        >
         <input type="text" name="case" v-model="caseObject.case.description" />
-        <label for="case"
+        <label for="case" class="largeLabel"
           >Describe the evidence supporting the intervention:</label
         >
         <input type="text" name="case" v-model="caseObject.case.evidence" />
