@@ -33,10 +33,13 @@
         />
         
         <br />
-        <label for="barrierSelector">What Barriers are being targeted?</label>
-        <select v-model="strategies[selectedStrategy].edu_barrier" id="barrierSelector">
-          <option v-for="(barrier, index) in barriers" :key="index" :value="index">{{barrier.description}}</option>
-        </select>
+        <label>What Barriers are being targeted?</label>
+        <div v-for="(behav,behaviourIndex) in actors[strategies[selectedStrategy].actor].behaviour" :key="'behi:'+behaviourIndex">
+          <div v-for="(barrier, barrierIndex) in behav.barriers" :key="'bari:'+barrierIndex">
+            <input type="checkbox" v-model="strategies[selectedStrategy].cbBarrier" :value="barrier.description" :id="'cb'+strategies[selectedStrategy].actor+':'+behaviourIndex+':'+barrierIndex" :key="'cb'+strategies[selectedStrategy].actor+':'+behaviourIndex+':'+barrierIndex"/>
+            <label class="cbLabel noSelect" :for="'cb'+strategies[selectedStrategy].actor+':'+behaviourIndex+':'+barrierIndex">{{barrier.description}}</label>
+          </div>
+        </div>
         
         <br />
         <label for="adaptationsText">What adaptations might you consider?</label>
@@ -71,11 +74,6 @@ export default {
       case: this.caseObject,
       strategies: this.caseObject.case.strategies,
       actors: this.caseObject.case.actors,
-      barriers: this.caseObject.case.actors.forEach(actor => {
-        actor.behaviour.forEach(behaviour => {
-          return behaviour.barriers;
-        });
-      }),
       selectedStrategy: 0,
       title: "Operationalizing Strategies",
       text: "Answer the questions below for each of your selected strategies to determine how to operationalize them.",
@@ -87,17 +85,65 @@ export default {
     };
   },
   mounted: function(e){
-    console.log(this.strategies[this.selectedStrategy].delivery);
+    //console.log(this.strategies[this.selectedStrategy].delivery);
   },
   methods: {
-    next: function () {},
-    validate: function () {},
+    next: function () {  
+      if (this.validate())
+        this.$router.push({ path: "/summary" });
+    },
+    validate: function () {
+      /*
+      var newStrategy = {
+        id: fixedStrategyId,
+        name: fixedValue,
+        actor: eachActor,
+        delivery: singleDelivery,
+        del_strat: [],
+        edu_barrier: "",
+        adaptations: ""
+      };
+      */
+
+      //barriers are valid
+      for (strategy in this.strategies){
+        for (cbBarrier in strategy.cbBarriers){
+          if (cbBarriers)
+            return true;  
+          else {
+            alert("Please select at least one barrier");    
+            return false;
+          }
+        }
+      }
+
+      return false;
+    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+input[type=checkbox]{
+  position: relative !important;
+  display: inline !important;
+  opacity: unset !important;
+  pointer-events: all !important;
+}
+.cbLabel {
+  font-size: 20px;
+  color: black; 
+}
+.noSelect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
 .userInput {
   clear: both;
 }
