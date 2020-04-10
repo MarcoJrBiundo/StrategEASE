@@ -119,7 +119,7 @@ export default {
             actor: 0,
             delivery: "",
             del_strat: "",
-            edu_barrier: "",
+            edu_barrier: [],
             adaptations: ""
           };
           this.storedStrategies.push(newStrategy);
@@ -178,8 +178,17 @@ export default {
       return foundStrategies;
     
     },
-    next: function () {},
-    validate: function () {},
+    next: function () {
+      if (this.validate())
+        this.$router.push({ path: "/os-strategy" });
+      else 
+        alert("Please select at least one strategy");
+    },
+    validate: function () {
+      if (this.storedStrategies.length)
+        return true;  
+      return false;
+    },
   }
 };
 </script>
