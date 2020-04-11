@@ -1,38 +1,34 @@
 <template>
   <div class="indexclass">
-    <div class="content">
+
       <div class="inputs">
-<<<<<<< HEAD
         <div ref='content'>
           <h1>{{this.caseObject.case.name}}</h1>
-          <p>Project Description: {{this.caseObject.case.description}}</p>
-          <p>Project Evidence: {{this.caseObject.case.evidence}}</p>
+              <button class="btn" @click="downloadPDF">Download PDF</button>
+          <h5><strong>Project Description:</strong> {{this.caseObject.case.description}}</h5>
+          <h5><strong>Project Evidence:</strong> {{ this.caseObject.case.evidence}}</h5>
+         <p> ___________________________________________________________</p>
+
+          <div v-for="(strat, index) in this.caseObject.case.strategies" :key="index" :value="index">
+            <h5>{{ strat.name }}</h5>
+           <p><strong><u>Who will Change:</u> </strong> {{actors[strat.actor].name}}</p>
+              <div v-for="(behave, index1) in actors[strat.actor].behaviour" :key="index1" :value="index1">
+              <p><strong><u>What will Change:</u> </strong>  {{behave.description}}</p>
 
 
-
-          <div v-for="(actor, index) in this.caseObject.case.actors" :key="index" :value="index">
-            <p>Who will Change: {{ actor.name }}</p>
-              <div v-for="(behaviour, index) in actor.behaviour" :key="index" :value="index">
-                <p>What will Change: {{ behaviour.description }}</p>
-                  <div v-for="(barrier, index) in behaviour.barriers" :key="index" :value="index">
-                  <p>What  is the barrier: {{ barrier.description}}</p>
-                  </div>
-
-            </div>
+              <div v-for="(barrier, index2) in actors[strat.actor].behaviour[index1].barriers" :key="index2" :value="index2">
+                  <p><strong><u>Relavent Barrier:</u> </strong> {{barrier.description}}</p> 
+                </div>
+            
+            </div> 
+       
+          <p><strong><u>Who will deliver this strategy:</u> </strong> {{strat.delivery}}</p>
+            <p><strong><u>How will it be delivered: </u>  </strong>{{strat.del_strat}}</p>
+            <p><strong><u>Potential Adaptations:</u> </strong> {{strat.adaptations}}</p>
+            <p>_____________________________________</p>
           </div>
-=======
-        <div ref="content" v-if="this.caseObject.case.strategies.length">
-          <h1>{{ this.caseObject.case.name }}</h1>
-          <p>Project Description: {{ this.caseObject.case.description }}</p>
-          <p>Project Evidence: {{ this.caseObject.case.evidence }}</p>
-          <p>Who will change: {{ this.caseObject.case.actors[0].name }}</p>
-          <p>
-            What will change:
-            {{ this.caseObject.case.actors[0].behaviour[0].description }}
-          </p>
->>>>>>> 89732e838ce73228815f4c263ed18edac626f009
         </div>
-        <div class="content" v-else>
+        <!-- <div class="content" v-else>
           <h2>There is no Data to print yet.</h2>
           <p>
             Please go through the process of creating your strategies starting
@@ -41,11 +37,10 @@
               The Description Page </router-link
             >.
           </p>
-        </div>
-        <button class="btn" @click="downloadPDF">Download PDF</button>
+        </div> -->
       </div>
-    </div>
-  </div>
+   </div>
+
 </template>
 
 <script>
@@ -64,6 +59,7 @@ export default {
     return {
       title: "Summary",
       text: "This is the Summary Page ",
+      actors: this.caseObject.case.actors,
       links: [
         { link: "www.google.com", display: "www.habits.com" },
         { link: "www.google.com", display: "www.breakinghabits.org" },
@@ -73,6 +69,7 @@ export default {
   },
   created() {
     console.log(this.caseObject);
+    console.log(this.actors)
   },
   methods: {
     downloadPDF() {
@@ -90,14 +87,16 @@ export default {
 };
 </script>
 
+
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<<<<<<< HEAD
 <style>
 
 
+.content {
+  height: 200%;
+  
 
+}
 
 </style>
-=======
-<style></style>
->>>>>>> 89732e838ce73228815f4c263ed18edac626f009
