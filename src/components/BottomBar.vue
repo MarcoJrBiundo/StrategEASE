@@ -93,6 +93,8 @@ export default {
   justify-content: space-between;
   margin-right: 5%;
   margin-left: 5%;
+  opacity: 1;
+  background: white;
 }
 
 .botBut {
@@ -120,10 +122,3 @@ export default {
 .centerBut {
 }
 </style>
-
-let currentCaseName = this.caseObject.name;
-if(this.prevCases.includes(currentCaseName) ){
-db.collection('cases').doc(this.caseObject.id).update({ name:
-this.caseObject.name, case: this.case }) }else{ db.collection('cases').add({
-name: this.caseObject.name, case: this.caseObject.case, })
-this.$parent.validate(); this.$router.push({ path: "/" }); } },

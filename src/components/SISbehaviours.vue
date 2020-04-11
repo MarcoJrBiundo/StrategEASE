@@ -4,7 +4,7 @@
     <div class="content">
       <div class="selects">
         <div class="leftSelect">
-          <label>Select an Actor:</label>
+          <label class="largeLabel">Select an Actor:</label>
 
           <select v-model="actorSelected">
             <option
@@ -16,7 +16,9 @@
           </select>
         </div>
         <div class="rightSelect">
-          <label>Select a Behaviour for the selected Actor:</label>
+          <label class="largeLabel"
+            >Select a Behaviour For The Current Actor:</label
+          >
           <select v-model="behaviourSelected">
             <option
               v-for="(behaviour, index) in actors[actorSelected].behaviour"
@@ -35,7 +37,7 @@
         :key="index"
       >
         <div class="leftInput">
-          <label>Input for barrier {{ index }} </label>
+          <label class="smallLabel">Barrier #{{ index + 1 }} </label>
           <input v-model="barrier.description" :key="barrier.id" />
         </div>
 
@@ -43,7 +45,8 @@
           v-if="index !== 0"
           v-on:click="removeBarrier(index)"
           type="button"
-          value="Remove a Barrier"
+          value="Remove Barrier"
+          class="barrierButton remove"
         />
         <div
           v-for="(domain, domainIndex) in actors[actorSelected].behaviour[
@@ -52,6 +55,7 @@
           :key="domainIndex"
           class="rightInput"
         >
+          <label class="smallLabel">Domain #{{ domainIndex + 1 }}</label>
           <select v-model="domain.domainNumber">
             <option
               v-for="(domainOpt, optIndex) in map.TDFDomains"
@@ -65,6 +69,7 @@
             v-on:click="removeDomain(index, domainIndex)"
             type="button"
             value="Remove a Domian"
+            class="remove removeDomain"
           />
         </div>
         <input
@@ -73,7 +78,12 @@
           value="Add a Domain"
         />
       </div>
-      <input v-on:click="addBarrier()" type="button" value="Add a Barrier" />
+      <input
+        v-on:click="addBarrier()"
+        type="button"
+        value="Add a Barrier"
+        class="barrierButton"
+      />
     </div>
     <BottomBar :caseObject="caseObject"></BottomBar>
   </div>
@@ -282,6 +292,7 @@ export default {
 
 select {
   display: block;
+  margin-bottom: 1em;
 }
 
 .leftSelect {
@@ -294,18 +305,39 @@ select {
   width: 48%;
 }
 .barrier {
-  display: flexbox;
+  /* display: flexbox; */
+  margin-top: 1em;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 30px;
+  border: 1px #00000029 solid;
+  opacity: 1;
+  padding: 10px;
 }
 
 .leftInput {
-  width: 47%;
+  /* width: 47%; */
   /* clear: both;
   float: left; */
 }
 
 .rightInput {
-  width: 47%;
+  /* width: 47%;
   float: right;
-  clear: right;
+  clear: right; */
+}
+
+.barrier input[type="button"] {
+  margin-top: 1em;
+}
+
+.barrierButton {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+  display: block;
+}
+
+.removeDomain {
+  float: right;
 }
 </style>
