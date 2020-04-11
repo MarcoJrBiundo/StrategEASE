@@ -6,8 +6,19 @@
           <h1>{{this.caseObject.case.name}}</h1>
           <p>Project Description: {{this.caseObject.case.description}}</p>
           <p>Project Evidence: {{this.caseObject.case.evidence}}</p>
-           <p>Who will change: {{this.caseObject.case.actors[0].name}}</p>
-           <p>What will change: {{this.caseObject.case.actors[0].behaviour[0].description}}</p>
+
+
+
+          <div v-for="(actor, index) in this.caseObject.case.actors" :key="index" :value="index">
+            <p>Who will Change: {{ actor.name }}</p>
+              <div v-for="(behaviour, index) in actor.behaviour" :key="index" :value="index">
+                <p>What will Change: {{ behaviour.description }}</p>
+                  <div v-for="(barrier, index) in behaviour.barriers" :key="index" :value="index">
+                  <p>What  is the barrier: {{ barrier.description}}</p>
+                  </div>
+
+            </div>
+          </div>
         </div>
            <button class="btn" @click="downloadPDF">Download PDF</button>
       </div>
@@ -67,17 +78,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.navbar {
-    padding: 0 20px;
-     top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 119px;
-    background: #14B49E 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #00000029;
-    border-radius: 0px 0px 0px 41px;
-    opacity: 1;  
-}
+
 
 
 
