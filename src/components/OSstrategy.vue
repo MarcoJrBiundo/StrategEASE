@@ -36,7 +36,7 @@
         <label>What Barriers are being targeted?</label>
         <div v-for="(behav,behaviourIndex) in actors[strategies[selectedStrategy].actor].behaviour" :key="'behi:'+behaviourIndex">
           <div v-for="(barrier, barrierIndex) in behav.barriers" :key="'bari:'+barrierIndex">
-            <input type="checkbox" v-model="strategies[selectedStrategy].cbBarrier" :value="barrier.description" :id="'cb'+strategies[selectedStrategy].actor+':'+behaviourIndex+':'+barrierIndex" :key="'cb'+strategies[selectedStrategy].actor+':'+behaviourIndex+':'+barrierIndex"/>
+            <input type="checkbox" v-model="strategies[selectedStrategy].barriers" :value="barrier.description" :id="'cb'+strategies[selectedStrategy].actor+':'+behaviourIndex+':'+barrierIndex" :key="'cb'+strategies[selectedStrategy].actor+':'+behaviourIndex+':'+barrierIndex"/>
             <label class="cbLabel noSelect" :for="'cb'+strategies[selectedStrategy].actor+':'+behaviourIndex+':'+barrierIndex">{{barrier.description}}</label>
           </div>
         </div>
@@ -89,10 +89,10 @@ export default {
   },
   methods: {
     next: function () {  
-      if (this.validate())
+      if (this.validate(true))
         this.$router.push({ path: "/summary" });
     },
-    validate: function () {
+    validate: function (isAlerting) {
       /*
       var newStrategy = {
         id: fixedStrategyId,
@@ -100,24 +100,42 @@ export default {
         actor: eachActor,
         delivery: singleDelivery,
         del_strat: [],
-        edu_barrier: "",
+        barriers: "",
         adaptations: ""
       };
       */
+      var result = true;
+      //alerts twice due to next calling this
+      for (var i in this.strategies){
+        var strategy = this.strategies[i];
 
-      //barriers are valid
-      for (strategy in this.strategies){
-        for (cbBarrier in strategy.cbBarriers){
-          if (cbBarriers)
-            return true;  
-          else {
-            alert("Please select at least one barrier");    
-            return false;
-          }
+        if(strategy.barriers.length < 1){
+          if (isAlerting)
+            alert("Strategy: "+strategy.name+"\nPlease select at least one barrier");    
+          return false;
         }
+
+        if (!strategy.delivery && !strategy.delivery.length) {
+          if (isAlerting)
+            alert("Strategy: "+strategy.name+"\nPlease enter a delivery leader");    
+          return false;
+        }
+
+        if (!strategy.del_strat && !strategy.del_strat.length) {
+          if (isAlerting)
+            alert("Strategy: "+strategy.name+"\nPlease enter a delivery method");    
+          return false;
+        }
+
+        if (!strategy.adaptations && !strategy.adaptations.length) {
+          if (isAlerting)
+            alert("Strategy: "+strategy.name+"\nPlease enter a possible adaptation");    
+          return false;
+        }
+          
       }
 
-      return false;
+      return result;
     },
   },
 };

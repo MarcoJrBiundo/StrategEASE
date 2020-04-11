@@ -45,8 +45,8 @@ export default {
       } else {
         this.createCase();
         this.$parent.validate();
-        this.$router.push({ path: "/" });
       }
+      this.$router.push({ path: "/" });
     },
     next: function(e) {
       /** calls parent next function to validate

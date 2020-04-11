@@ -119,7 +119,7 @@ export default {
             actor: 0,
             delivery: "",
             del_strat: "",
-            edu_barrier: [],
+            barriers: [],
             adaptations: ""
           };
           this.storedStrategies.push(newStrategy);
