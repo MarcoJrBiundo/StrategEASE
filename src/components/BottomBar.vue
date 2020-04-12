@@ -88,13 +88,13 @@ export default {
 .bottomBar {
   position: absolute;
   bottom: 2.5%;
-  width: 90%;
+  width: 95%;
   display: flex;
   justify-content: space-between;
-  margin-right: 5%;
-  margin-left: 5%;
+  padding-right: 5%;
+  padding-left: 5%;
   opacity: 1;
-  background: white;
+  background: rgba(255, 255, 255, 100);
 }
 
 .botBut {
