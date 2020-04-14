@@ -7,8 +7,7 @@
           <li class="leftSpacing">
             <router-link :to="{ name: 'DTIdescription' }">
               Description
-            </router-link
-            >
+            </router-link>
           </li>
           <!--
           <li>
@@ -32,7 +31,7 @@
             </router-link>
           </li>
           <li class="leftSpacing">
-            <router-link :to="{ name: 'SISdomains' }" >
+            <router-link :to="{ name: 'SISdomains' }">
               Domains
             </router-link>
           </li>
@@ -42,16 +41,17 @@
         <a class="listControl">Operationalize</a>
         <ul class="sublists" hidden>
           <li class="leftSpacing">
-            <router-link :to="{ name: 'OSStrategy' }" >
+            <router-link :to="{ name: 'OSStrategy' }">
               Strategies
             </router-link>
           </li>
         </ul>
       </li>
-      <li> 
-        <router-link :to="{ name: 'Summary' }" >
-              Strategies
-            </router-link></li>
+      <li>
+        <router-link :to="{ name: 'Summary' }">
+          Strategies
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -76,9 +76,9 @@ export default {
 
 .sidenavi {
   position: absolute;
-  height: 80%;
+  height: 86%;
   width: 15%;
-  top: 18%;
+  top: 12%;
   left: 1%;
   /* margin-top: 30px; */
   z-index: 1;
