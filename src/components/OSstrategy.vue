@@ -1,6 +1,7 @@
 <template>
   <div class="indexclass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
+    
     <div class="content">
       <div class="userInput">
         <label for="strategySelector">Choose a Strategy</label>
