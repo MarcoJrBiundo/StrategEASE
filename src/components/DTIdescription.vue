@@ -5,13 +5,11 @@
       <div class="inputs">
         <label for="case" class="largeLabel">Case:</label>
         <input type="text" name="case" v-model="caseObject.case.name" />
-        <label for="case" class="largeLabel"
-          >Describe the intervention you are implmenting:</label
-        >
+        <br />
+        <label for="case" class="largeLabel">Describe the intervention you are implmenting:</label>
         <input type="text" name="case" v-model="caseObject.case.description" />
-        <label for="case" class="largeLabel"
-          >Describe the evidence supporting the intervention:</label
-        >
+        <br />
+        <label for="case" class="largeLabel">Describe the evidence supporting the intervention:</label>
         <input type="text" name="case" v-model="caseObject.case.evidence" />
       </div>
     </div>

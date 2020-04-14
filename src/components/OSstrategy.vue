@@ -92,6 +92,7 @@ export default {
       if (this.validate(true))
         this.$router.push({ path: "/summary" });
     },
+    ///isAlerting: type boolean, to alert the user or not
     validate: function (isAlerting) {
       /*
       var newStrategy = {
