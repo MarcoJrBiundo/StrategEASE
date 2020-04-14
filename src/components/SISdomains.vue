@@ -1,5 +1,5 @@
 <template>
-  <div class="domainsClass">
+  <div class="indexclass">
     <CommonMainPage :title="title" :text="text" :links="links"></CommonMainPage>
     <div class="content">
       <select id="tdfDomains" v-model="selectedDomain" v-on:change=loadUi>
@@ -199,30 +199,10 @@ export default {
   display: block;
 }
 
-.domainsClass input[type="checkbox"] {
+.indexclass input[type="checkbox"] {
   display: inline;
   position: relative;
   opacity: 100;
-}
-
-.domainsClass {
-  position: absolute;
-  top: 18%;
-  left: 17%;
-  width: 82%;
-  height: 80%;
-  background: #ffffff 0% 0%;
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 30px;
-  opacity: 1;
-}
-
-.domainsClass h2 {
-  padding-left: 40px;
-  text-align: left;
-  letter-spacing: 0;
-  color: #206aa2;
-  opacity: 1;
 }
 
 .caseNameField {

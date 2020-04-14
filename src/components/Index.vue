@@ -80,6 +80,7 @@ export default {
   color: #206aa2;
   opacity: 1;
 }
+
 .openCase {
   cursor: pointer;
 }
