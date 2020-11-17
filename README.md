@@ -1,6 +1,5 @@
 # strategease
-
-> A Vue.js project
+A web application targeted at correcting habitual behaviors in the workplace (healthcare-focused). Used the Vue.JS framework and Google Firebase to automate build and release
 
 ## Build Setup
 
